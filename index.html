@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ख़बरें इंडिया न्यूज़ | Khabre India News</title>
+<meta name="description" content="ख़बरें इंडिया न्यूज़ — आवाज़ जन गण मन की। निष्पक्ष, तेज़ और भरोसेमंद पत्रकारिता।">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1B3FAE;
+    --blue-deep:#122B7E;
+    --red:#E30613;
+    --ink:#16181D;
+    --paper:#F6F5F1;
+    --paper-dim:#EDEBE4;
+    --muted:#6B7280;
+    --gold:#C9971F;
+    --line:#DEDBD1;
+    --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Hind',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 20px;}
+  h1,h2,h3,h4,.brand,.nav a,.section-title{font-family:'Baloo 2',sans-serif;}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* Utility bar */
+  .utility-bar{background:var(--ink);color:#cfd3dd;font-family:'Inter',sans-serif;font-size:12.5px;}
+  .utility-bar .wrap{display:flex;justify-content:space-between;align-items:center;height:34px;flex-wrap:wrap;gap:6px;}
+  .utility-bar .date{letter-spacing:.2px;opacity:.9;display:flex;align-items:center;gap:8px;}
+  .utility-bar .date .live-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 1.4s infinite;}
+  .utility-bar .contact-mini{display:flex;gap:16px;}
+  .utility-bar .contact-mini span{opacity:.85;}
+  .utility-bar .contact-mini b{color:#fff;font-weight:600;}
+
+  /* Masthead */
+  .masthead{background:var(--white);border-bottom:1px solid var(--line);position:relative;}
+  .masthead-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;flex-wrap:wrap;}
+  .brand-block{display:flex;align-items:center;gap:16px;animation:brandIn .9s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes brandIn{from{opacity:0;transform:translateX(-18px);}to{opacity:1;transform:none;}}
+  .brand-logo{height:78px;width:auto;border-radius:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(18,43,126,.16);}
+  .brand-text .kicker{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:var(--red);font-weight:800;text-transform:uppercase;}
+  .brand-text .brand{font-size:30px;color:var(--blue-deep);font-weight:800;line-height:1.15;margin-top:2px;}
+  .brand-text .tagline{font-size:14.5px;color:var(--red);font-weight:600;margin-top:2px;}
+
+  /* Social icons */
+  .social-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .social-ic{
+    position:relative;width:46px;height:46px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;cursor:pointer;flex-shrink:0;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s ease;
+    box-shadow:0 3px 10px rgba(0,0,0,.16);overflow:hidden;
+  }
+  .social-ic::after{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    background:rgba(255,255,255,.28);transform:scale(0);opacity:0;
+    transition:transform .45s ease,opacity .45s ease;
+  }
+  .social-ic:hover{transform:translateY(-5px) scale(1.08);box-shadow:0 10px 22px rgba(0,0,0,.28);}
+  .social-ic:hover::after{transform:scale(1.6);opacity:1;}
+  .social-ic:active{transform:translateY(-2px) scale(1.02);}
+  .social-ic svg{width:22px;height:22px;position:relative;z-index:1;}
+  .social-ic .tip{
+    position:absolute;bottom:-30px;left:50%;transform:translateX(-50%) translateY(6px);
+    background:var(--ink);color:#fff;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
+    padding:3px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;
+    transition:opacity .25s ease,transform .25s ease;z-index:5;
+  }
+  .social-ic:hover .tip{opacity:1;transform:translateX(-50%) translateY(0);}
+  .yt{background:#FF0000;}
+  .x{background:#000000;}
+  .fb{background:#1877F2;}
+  .ig{background:linear-gradient(135deg,#4f5bd5,#962fbf,#d62976,#fa7e1e,#feda75);}
+  .wa{background:#25D366;}
+  .em{background:linear-gradient(135deg,#C9971F,#E3B94A);}
+
+  /* Ticker */
+  .ticker{background:var(--red);color:#fff;overflow:hidden;position:relative;}
+  .ticker .wrap{display:flex;align-items:center;height:42px;padding-left:0;}
+  .ticker-label{
+    background:var(--blue-deep);height:100%;display:flex;align-items:center;gap:8px;
+    padding:0 16px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;
+    letter-spacing:.5px;
+  }
+  .pulse-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(1.6);}100%{opacity:1;transform:scale(1);}}
+  .ticker-track-outer{flex:1;overflow:hidden;height:100%;display:flex;align-items:center;}
+  .ticker-track{display:flex;gap:60px;white-space:nowrap;animation:scroll-left 40s linear infinite;font-size:14.5px;font-weight:500;padding-left:24px;}
+  .ticker-track span{opacity:.95;}
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* Live time strip */
+  .live-strip{
+    background:linear-gradient(90deg,#122B7E 0%,#1B3FAE 55%,#E30613 100%);
+    color:#fff;font-family:'Inter',sans-serif;
+  }
+  .live-strip .wrap{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:10px 20px;flex-wrap:wrap;
+  }
+  .live-strip .live-badge{
+    display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
+    padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:1px;
+    border:1px solid rgba(255,255,255,.28);
+  }
+  .live-strip .live-badge .live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 1.4s infinite;box-shadow:0 0 0 3px rgba(34,197,94,.28);}
+  .live-strip .time-block{display:flex;align-items:center;gap:14px;font-weight:600;font-size:15px;}
+  .live-strip .time-block .clock{font-family:'Baloo 2',sans-serif;font-size:22px;font-weight:800;letter-spacing:1px;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.25);}
+  .live-strip .time-block .day{opacity:.9;font-size:13.5px;}
+  .live-strip .update-info{font-size:12.5px;opacity:.9;}
+  .live-strip .update-info b{color:#ffe97a;}
+
+  /* Nav */
+  .nav-bar{background:var(--blue);position:sticky;top:0;z-index:40;box-shadow:0 2px 12px rgba(18,43,126,.18);}
+  .nav-bar .wrap{display:flex;overflow-x:auto;}
+  .nav-bar a{
+    padding:13px 18px;font-size:15.5px;font-weight:600;color:#fff;white-space:nowrap;
+    border-bottom:3px solid transparent;transition:background .2s ease,border-color .2s ease;cursor:pointer;
+  }
+  .nav-bar a.active,.nav-bar a:hover{border-bottom:3px solid var(--gold);background:rgba(255,255,255,.08);}
+
+  /* Layout */
+  .layout{display:grid;grid-template-columns:2.15fr 1fr;gap:34px;padding:34px 0 10px;}
+  @media (max-width:900px){.layout{grid-template-columns:1fr;}}
+
+  .section-title{
+    font-size:21px;color:var(--blue-deep);font-weight:700;
+    display:flex;align-items:center;gap:10px;margin:34px 0 16px;
+  }
+  .section-title::before{content:"";width:6px;height:22px;background:var(--red);border-radius:3px;display:inline-block;}
+  .layout .section-title:first-child, main>.section-title:first-child{margin-top:0;}
+
+  /* Hero grid */
+  .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;}
+  @media (max-width:640px){.hero-grid{grid-template-columns:1fr;}}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:box-shadow .25s ease,transform .25s ease;cursor:pointer;position:relative;}
+  .card:hover{box-shadow:0 14px 30px rgba(20,30,60,.14);transform:translateY(-4px);}
+  .thumb{aspect-ratio:16/9;position:relative;overflow:hidden;background:#0b1230;}
+  .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .card:hover .thumb img{transform:scale(1.06);}
+  .thumb::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%);
+    pointer-events:none;
+  }
+  .thumb .cat-tag{
+    position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:11px;font-weight:700;
+    padding:4px 10px;border-radius:999px;font-family:'Inter',sans-serif;letter-spacing:.4px;z-index:2;
+  }
+  .thumb .live-tag{
+    position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;
+    padding:4px 9px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:600;z-index:2;
+    display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(6px);
+  }
+  .thumb .live-tag .d{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 1.4s infinite;}
+
+  .card-body{padding:16px 18px 18px;}
+  .card-body h3{font-size:18px;line-height:1.35;color:var(--ink);margin-bottom:8px;}
+  .card.lead .card-body h3{font-size:23px;}
+  .card-body p{font-size:14.5px;color:#3c3f47;margin-bottom:10px;}
+  .meta{display:flex;gap:14px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);align-items:center;flex-wrap:wrap;}
+  .meta .dot{width:4px;height:4px;background:#c8c8c8;border-radius:50%;}
+
+  .card-row{display:flex;gap:20px;overflow-x:auto;padding-bottom:8px;}
+  .card-row .card{min-width:290px;flex:0 0 auto;}
+  .card-row .card .card-body h3{font-size:16.5px;}
+
+  /* search / filter */
+  .filter-bar{display:flex;gap:10px;align-items:center;margin:0 0 6px;flex-wrap:wrap;}
+  .filter-bar input{
+    flex:1;min-width:180px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;
+    font-family:'Hind',sans-serif;font-size:14.5px;background:#fff;transition:box-shadow .2s ease;
+  }
+  .filter-bar input:focus{outline:none;box-shadow:0 0 0 3px rgba(27,63,174,.25);border-color:var(--blue);}
+
+  /* Sidebar */
+  .side-box{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:24px;}
+  .side-box h4{color:var(--blue-deep);font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .side-box h4::before{content:"";width:5px;height:17px;background:var(--red);border-radius:2px;}
+  .trend-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--paper-dim);}
+  .trend-item:last-child{border-bottom:none;}
+  .trend-num{font-family:'Baloo 2',sans-serif;font-size:20px;color:var(--red);font-weight:700;width:26px;flex-shrink:0;}
+  .trend-text a{font-size:14.5px;font-weight:500;color:var(--ink);transition:color .2s ease;cursor:pointer;}
+  .trend-text a:hover{color:var(--blue);}
+  .trend-text .t-meta{font-family:'Inter',sans-serif;font-size:11.5px;color:var(--muted);margin-top:3px;}
+
+  .video-box .video-fallback{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;}
+  .video-fallback{
+    background:linear-gradient(135deg,#000,#333);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;gap:8px;text-align:center;padding:16px;transition:transform .25s ease;
+  }
+  .video-fallback:hover{transform:scale(1.02);}
+
+  .side-social{display:flex;flex-direction:column;gap:10px;}
+  .follow-btn{
+    display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:12px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;
+    box-shadow:0 3px 8px rgba(0,0,0,.14);cursor:pointer;position:relative;overflow:hidden;
+    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease;
+  }
+  .follow-btn:hover{transform:translateX(4px);box-shadow:0 8px 18px rgba(0,0,0,.22);}
+  .follow-btn .fic{width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .follow-btn .fic svg{width:20px;height:20px;}
+
+  /* Editor / footer */
+  footer{background:var(--blue-deep);color:#dfe4f5;margin-top:40px;position:relative;}
+  .editor-section{padding:44px 0 30px;border-bottom:1px solid rgba(255,255,255,.14);}
+  .editor-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .editor-head .em-logo{height:44px;width:auto;border-radius:8px;background:#fff;padding:3px;}
+  .editor-head h3{color:#fff;font-size:20px;}
+  .editor-head .bar{flex:1;height:1px;background:rgba(255,255,255,.16);}
+  .editor-card{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start;}
+  @media (max-width:600px){.editor-card{grid-template-columns:1fr;}}
+  .editor-avatar{
+    width:104px;height:104px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#E3B94A);color:var(--blue-deep);
+    display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',sans-serif;font-size:36px;font-weight:800;
+    flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.3);
+  }
+  .editor-card h4{color:#fff;font-size:22px;margin-bottom:2px;}
+  .editor-card .role{color:var(--gold);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px;margin-bottom:14px;}
+  .editor-card p{font-size:14.5px;line-height:1.8;color:#dfe4f5;margin-bottom:10px;max-width:74ch;}
+  .editor-card .quote{border-left:3px solid var(--gold);padding-left:14px;font-style:italic;color:#fff;}
+
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px;padding:34px 0;}
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-grid h5{color:#fff;font-family:'Baloo 2',sans-serif;font-size:16px;margin-bottom:14px;}
+  .footer-grid p, .footer-grid a{font-size:14px;color:#c3cae3;line-height:1.8;}
+  .footer-brand-logo{height:56px;width:auto;border-radius:10px;background:#fff;padding:4px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.25);}
+  .footer-grid .contact-line{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+  .footer-grid .contact-line a:hover{color:#fff;text-decoration:underline;}
+  .foot-social{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .foot-social .social-ic{width:40px;height:40px;box-shadow:0 3px 8px rgba(0,0,0,.3);}
+  .foot-social .social-ic svg{width:19px;height:19px;}
+  .cat-links a{transition:color .2s ease,padding-left .2s ease;cursor:pointer;}
+  .cat-links a:hover{color:#fff;padding-left:4px;}
+  .bottom-bar{border-top:1px solid rgba(255,255,255,.14);padding:16px 0;font-family:'Inter',sans-serif;font-size:12.5px;color:#9aa4c7;text-align:center;}
+
+  ::selection{background:var(--gold);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<!-- Utility Bar -->
+<div class="utility-bar">
+  <div class="wrap">
+    <span class="date" id="liveDate"><span class="live-dot"></span><span id="liveDateText"></span></span>
+    <div class="contact-mini">
+      <span>ऑफिस: <b>9651328100</b></span>
+      <span>संपादक: <b>+91 83051 17578</b></span>
+    </div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="brand-block">
+      <img src="logo.png" alt="ख़बरें इंडिया न्यूज़ लोगो" class="brand-logo">
+      <div class="brand-text">
+        <div class="kicker"><span>Khabre India News</span></div>
+        <div class="brand"><span>ख़बरें इंडिया न्यूज़</span></div>
+        <div class="tagline"><span>आवाज़ जन गण मन की</span></div>
+      </div>
+    </div>
+    <div class="social-row" id="headerSocial"></div>
+  </div>
+</div>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="wrap">
+    <div class="ticker-label"><span class="pulse-dot"></span> ताज़ा ख़बरें</div>
+    <div class="ticker-track-outer">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Live Time Strip -->
+<div class="live-strip">
+  <div class="wrap">
+    <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+    <div class="time-block">
+      <span class="day" id="liveDay"></span>
+      <span class="clock" id="liveClock">--:--:--</span>
+    </div>
+    <div class="update-info">अंतिम अपडेट: <b id="lastUpdate">अभी-अभी</b></div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav-bar">
+  <div class="wrap" id="navWrap">
+    <a data-cat="all" class="active">होम</a>
+    <a data-cat="भारत">भारत</a>
+    <a data-cat="दुनिया">दुनिया</a>
+    <a data-cat="राजनीति">राजनीति</a>
+    <a data-cat="राज्य">राज्य</a>
+    <a data-cat="खेल">खेल</a>
+    <a data-cat="मनोरंजन">मनोरंजन</a>
+    <a data-cat="बिजनेस">बिजनेस</a>
+    <a data-cat="तकनीक">तकनीक</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="wrap layout">
+  <main>
+    <div class="filter-bar">
+      <input type="text" id="searchBox" placeholder="ख़बर खोजें...">
+    </div>
+
+    <div id="heroArea" class="hero-grid" style="margin-top:14px;"></div>
+
+    <div id="categoryRows"></div>
+  </main>
+
+  <aside>
+    <div class="side-box reveal">
+      <h4>ट्रेंडिंग ख़बरें</h4>
+      <div id="trendingList"></div>
+    </div>
+
+    <div class="side-box video-box reveal">
+      <h4>लेटेस्ट वीडियो</h4>
+      <a class="video-fallback social-link" data-app="vnd.youtube://www.youtube.com/@khabreindianews0224" href="https://www.youtube.com/@khabreindianews0224" target="_blank" rel="noopener">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+        <span style="font-family:'Inter',sans-serif;font-size:13px;">हमारा YouTube चैनल देखें</span>
+      </a>
+    </div>
+
+    <div class="side-box reveal">
+      <h4>हमें फॉलो करें</h4>
+      <div class="side-social" id="followList"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap editor-section reveal">
+    <div class="editor-head">
+      <img src="logo.png" alt="ख़बरें इंडिया न्यूज़" class="em-logo">
+      <h3>हमारे संपादक</h3>
+      <span class="bar"></span>
+    </div>
+    <div class="editor-card">
+      <div class="editor-avatar">AP</div>
+      <div>
+        <h4>अनुपम परिहार</h4>
+        <div class="role">संपादक (Editor) — ख़बरें इंडिया न्यूज़</div>
+        <p>अनुपम परिहार भारतीय पत्रकारिता जगत में एक भरोसेमंद और सम्मानित नाम हैं। ज़मीनी रिपोर्टिंग से अपने करियर की शुरुआत करने वाले अनुपम ने निष्पक्ष, तथ्यपरक और साहसिक पत्रकारिता को हमेशा अपना मूल सिद्धांत बनाया। उन्होंने <b>ख़बरें इंडिया न्यूज़</b> की स्थापना इसी दृढ़ सोच के साथ की — कि हर खबर जनता तक बिना किसी दबाव, पक्षपात और मिलावट के पहुँचे।</p>
+        <p>लखनऊ स्थित मुख्यालय से संचालित यह न्यूज़ प्लेटफ़ॉर्म उनके नेतृत्व में भारत, राजनीति, समाज, खेल, बिजनेस और मनोरंजन जैसे विषयों पर गहराई और संवेदनशीलता के साथ रिपोर्टिंग करता है। उनका दृढ़ विश्वास है कि पत्रकारिता केवल सूचना देने का माध्यम नहीं, बल्कि समाज के प्रति एक बड़ी ज़िम्मेदारी है — जो सच को सामने लाने और आम आदमी की आवाज़ बनने का दायित्व निभाती है।</p>
+        <p class="quote">"आवाज़ जन गण मन की" — इसी टैगलाइन के साथ अनुपम परिहार आम जनता की आवाज़ को सही मंच तक पहुँचाने के लिए प्रतिबद्ध हैं, और अपनी पूरी टीम को सटीक, संतुलित एवं समयबद्ध रिपोर्टिंग के लिए निरंतर प्रेरित करते हैं।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap footer-grid">
+    <div class="reveal">
+      <img src="logo.png" alt="ख़बरें इंडिया न्यूज़ लोगो" class="footer-brand-logo">
+      <h5>ख़बरें इंडिया न्यूज़</h5>
+      <p>आवाज़ जन गण मन की — निष्पक्ष, तेज़ और भरोसेमंद पत्रकारिता।</p>
+      <div class="foot-social" id="footerSocial"></div>
+    </div>
+    <div class="reveal">
+      <h5>संपर्क करें</h5>
+      <div class="contact-line">📍 <span>A1, वज़ीर हसन रोड, लखनऊ</span></div>
+      <div class="contact-line">☎ <span>ऑफिस नं.: <a href="tel:9651328100">9651328100</a></span></div>
+      <div class="contact-line">📞 <span>संपादक: <a href="tel:+918305117578">+91 83051 17578</a></span></div>
+      <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918318880819" href="https://wa.me/918318880819" target="_blank" rel="noopener">+91 83188 80819</a></span></div>
+      <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918305117578" href="https://wa.me/918305117578" target="_blank" rel="noopener">+91 83051 17578</a></span></div>
+      <div class="contact-line">✉ <span><a href="mailto:anupam03singh1998@gmail.com">anupam03singh1998@gmail.com</a></span></div>
+      <div class="contact-line">✉ <span><a href="mailto:Indianewskhabre@gmail.com">Indianewskhabre@gmail.com</a></span></div>
+    </div>
+    <div class="reveal cat-links">
+      <h5>श्रेणियाँ</h5>
+      <p><a data-cat="भारत">भारत</a><br>
+      <a data-cat="दुनिया">दुनिया</a><br>
+      <a data-cat="राजनीति">राजनीति</a><br>
+      <a data-cat="खेल">खेल</a><br>
+      <a data-cat="मनोरंजन">मनोरंजन</a></p>
+    </div>
+  </div>
+
+  <div class="bottom-bar">© <span id="yearNow"></span> Khabre India News — ख़बरें इंडिया न्यूज़। सर्वाधिकार सुरक्षित।</div>
+</footer>
+
+<script>
+/* ==========================================================================
+   SOCIAL LINKS
+   ========================================================================== */
+const SVG = {
+  yt:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-6.7L4.8 22H1.6l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2Zm-1.2 18h1.9L7.4 4h-2l12.3 16Z"/></svg>',
+  fb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.4h2.8l.4-3.3h-3.2V8.1c0-1 .3-1.6 1.7-1.6h1.6V3.5C16.5 3.4 15.4 3.3 14.2 3.3c-2.6 0-4.4 1.6-4.4 4.5v2.5H7v3.3h2.8V22h3.7Z"/></svg>',
+  ig:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.5.6.2 1 .5 1.5 1 .4.4.7.9 1 1.5.2.5.4 1.2.5 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.5-.2.6-.5 1-1 1.5-.4.4-.9.7-1.5 1-.5.2-1.2.4-2.5.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.5-.6-.2-1-.5-1.5-1-.4-.4-.7-.9-1-1.5-.2-.5-.4-1.2-.5-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.5.2-.6.5-1 1-1.5.4-.4.9-.7 1.5-1 .5-.2 1.2-.4 2.5-.5C9.4 2.2 9.8 2.2 12 2.2Zm0 5.3a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm0 1.8a2.7 2.7 0 1 1 0 5.4 2.7 2.7 0 0 1 0-5.4Zm4.7-2.9a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Z"/></svg>',
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.8-.9-2.1-1-.28-.1-.48-.15-.68.15-.2.3-.78 1-.96 1.2-.18.2-.36.22-.66.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.18-.3-.02-.46.13-.6.13-.13.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.24-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.5 0 1.47 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.14 4.54.72.3 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.08 1.8-.73 2.05-1.44.25-.7.25-1.32.18-1.44-.07-.12-.27-.2-.57-.35ZM12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .79.8-2.92-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>',
+  em:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2 8-5.2H4l8 5.2ZM4 8.3V17h16V8.3l-8 5.2-8-5.2Z"/></svg>'
+};
+
+const SOCIALS = [
+  { key:'yt', cls:'yt', label:'YouTube',   follow:'YouTube पर सब्सक्राइब करें',  app:'vnd.youtube://www.youtube.com/@khabreindianews0224', web:'https://www.youtube.com/@khabreindianews0224' },
+  { key:'ig', cls:'ig', label:'Instagram', follow:'Instagram पर फॉलो करें',       app:'instagram://user?username=khabreindia',              web:'https://www.instagram.com/khabreindia' },
+  { key:'fb', cls:'fb', label:'Facebook',  follow:'Facebook पर लाइक करें',        app:'fb://facewebmodal/f?href=https://www.facebook.com/share/18Xi5wJ67r/', web:'https://www.facebook.com/share/18Xi5wJ67r/' },
+  { key:'x',  cls:'x',  label:'X',         follow:'X पर फॉलो करें',              app:'twitter://user?screen_name=khabreindia0121',         web:'https://x.com/khabreindia0121' },
+  { key:'wa', cls:'wa', label:'WhatsApp (8318880819)', follow:'WhatsApp — 83188 80819', app:'whatsapp://send?phone=918318880819', web:'https://wa.me/918318880819' },
+  { key:'wa', cls:'wa', label:'WhatsApp (8305117578)', follow:'WhatsApp — 83051 17578', app:'whatsapp://send?phone=918305117578', web:'https://wa.me/918305117578' },
+  { key:'em', cls:'em', label:'Email — anupam03singh1998', follow:'Email — anupam03singh1998@gmail.com', app:'', web:'mailto:anupam03singh1998@gmail.com' },
+  { key:'em', cls:'em', label:'Email — Indianewskhabre',   follow:'Email — Indianewskhabre@gmail.com',   app:'', web:'mailto:Indianewskhabre@gmail.com' }
+];
+
+function isMobileDevice(){
+  return /android|iphone|ipad|ipod|blackberry|windows phone/i.test(navigator.userAgent || '');
+}
+function smartLaunch(e){
+  const el = e.currentTarget;
+  const app = el.getAttribute('data-app');
+  const web = el.getAttribute('data-web') || el.getAttribute('href');
+  if(!app || !isMobileDevice()) return;
+  e.preventDefault();
+  let launched = false;
+  const cancel = () => { launched = true; };
+  document.addEventListener('visibilitychange', cancel, { once:true });
+  window.addEventListener('pagehide', cancel, { once:true });
+  window.addEventListener('blur', cancel, { once:true });
+  window.location.href = app;
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', cancel);
+    if(!launched && !document.hidden){ window.location.href = web; }
+  }, 1400);
+}
+function bindSmartLinks(root){
+  (root || document).querySelectorAll('.social-link[data-app]').forEach(a=>{
+    a.removeEventListener('click', smartLaunch);
+    a.addEventListener('click', smartLaunch);
+  });
+}
+function iconBtn(s){
+  return `<a class="social-ic social-link ${s.cls}" ${s.app?`data-app="${s.app}"`:''} href="${s.web}" ${s.web.startsWith('mailto:')?'':'target="_blank" rel="noopener"'} aria-label="${s.label}">
+    ${SVG[s.key]}<span class="tip">${s.label}</span></a>`;
+}
+function followBtn(s){
+  return `<a class="follow-btn social-link ${s.cls}" ${s.app?`data-app="${s.app}"`:''} href="${s.web}" ${s.web.startsWith('mailto:')?'':'target="_blank" rel="noopener"'}>
+    <span class="fic">${SVG[s.key]}</span>${s.follow}</a>`;
+}
+function renderSocials(){
+  document.getElementById('headerSocial').innerHTML = SOCIALS.map(iconBtn).join('');
+  document.getElementById('footerSocial').innerHTML = SOCIALS.map(iconBtn).join('');
+  document.getElementById('followList').innerHTML = SOCIALS.map(followBtn).join('');
+  bindSmartLinks(document);
+}
+
+/* ==========================================================================
+   NEWS DATA — तस्वीरों के साथ (Unsplash open images)
+   ========================================================================== */
+const IMG = {
+  parliament:  'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=70',
+  election:    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=70',
+  economy:     'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=70',
+  cricket:     'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1200&q=70',
+  bollywood:   'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=70',
+  isro:        'https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=70',
+  farmer:      'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=70',
+  metro:       'https://images.unsplash.com/photo-1553773077-91673524aafa?auto=format&fit=crop&w=1200&q=70',
+  world:       'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=70',
+  ai:          'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=70',
+  weather:     'https://images.unsplash.com/photo-1527482797697-8795b05a13fe?auto=format&fit=crop&w=1200&q=70',
+  education:   'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=70',
+  hospital:    'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=70',
+  road:        'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1200&q=70',
+  temple:      'https://images.unsplash.com/photo-1524492514790-8d0c53d0b3b3?auto=format&fit=crop&w=1200&q=70'
+};
+
+/* minute offsets used to keep timestamps rolling (relative to page load) */
+const newsData = [
+  { id:1,  offset:3,   category:"भारत",     lead:true,
+    title:"संसद के बजट सत्र में अहम विधेयकों पर होगी चर्चा, विपक्ष ने की तीखी बहस की तैयारी",
+    summary:"बजट सत्र के पहले सप्ताह में सरकार कई अहम बिल पेश करेगी। महँगाई, रोज़गार और किसान मुद्दों पर विपक्ष सदन में सरकार को घेरने की योजना बना रहा है।",
+    body:"संसद का बजट सत्र आज से शुरू हो रहा है और सरकार की तरफ़ से आर्थिक सर्वेक्षण के बाद कई महत्वपूर्ण विधेयक पेश किए जाने हैं। विपक्षी दलों ने बैठक कर रणनीति तय की है और वे महँगाई, बेरोज़गारी तथा किसानों की समस्याओं पर चर्चा की माँग कर रहे हैं।",
+    img: IMG.parliament },
+
+  { id:2,  offset:12,  category:"राजनीति",
+    title:"पाँच राज्यों में विधानसभा उपचुनाव की तारीख़ों का ऐलान, कड़ी सुरक्षा के बीच होगा मतदान",
+    summary:"चुनाव आयोग ने पाँच राज्यों में ख़ाली विधानसभा सीटों पर उपचुनाव की तारीख़ें घोषित कर दी हैं। सभी दलों ने प्रचार अभियान तेज़ कर दिया है।",
+    body:"मुख्य निर्वाचन आयुक्त ने प्रेस कॉन्फ्रेंस में बताया कि पाँच राज्यों की कुल आठ विधानसभा सीटों पर अगले महीने की 18 तारीख़ को मतदान कराया जाएगा। मतगणना 21 तारीख़ को होगी।",
+    img: IMG.election },
+
+  { id:3,  offset:22,  category:"बिजनेस",
+    title:"शेयर बाज़ार में जोरदार तेज़ी, सेंसेक्स ने बनाया नया रिकॉर्ड ऊँचाई का स्तर",
+    summary:"आईटी और बैंकिंग शेयरों में लिवाली से घरेलू शेयर बाज़ार ने आज नया ऐतिहासिक शिखर छू लिया। निवेशकों की संपत्ति में भारी उछाल।",
+    body:"आज के कारोबारी सत्र में सेंसेक्स ने पहली बार अपने रिकॉर्ड ऊँचाई पर बंद हुआ। बाज़ार विश्लेषकों का कहना है कि विदेशी संस्थागत निवेशकों की लगातार खरीदारी और कंपनियों के अच्छे तिमाही नतीजों से बाज़ार को सहारा मिला है।",
+    img: IMG.economy },
+
+  { id:4,  offset:34,  category:"खेल",
+    title:"भारत ने रोमांचक मुक़ाबले में सीरीज़ अपने नाम की, कप्तान की धमाकेदार पारी",
+    summary:"अंतिम ओवर तक चले रोमांचक मुक़ाबले में भारतीय टीम ने विरोधी टीम को दो विकेट से हराकर सीरीज़ 2-1 से अपने नाम की।",
+    body:"कप्तान की 89 रन की ज़बरदस्त पारी और तेज़ गेंदबाज़ की चार विकेट लेने वाली शानदार गेंदबाज़ी की बदौलत टीम इंडिया ने आख़िरी वनडे में जीत दर्ज की। मैच के बाद कप्तान ने युवा खिलाड़ियों की तारीफ़ की।",
+    img: IMG.cricket },
+
+  { id:5,  offset:45,  category:"मनोरंजन",
+    title:"बड़े बजट की फ़िल्म ने पहले ही दिन बॉक्स ऑफ़िस पर तोड़े कई पुराने रिकॉर्ड",
+    summary:"साल की सबसे प्रतीक्षित फ़िल्म ने रिलीज़ के पहले ही दिन देश-विदेश में शानदार शुरुआत की है और 100 करोड़ के करीब कमाई की।",
+    body:"शुक्रवार को रिलीज़ हुई इस फ़िल्म ने पहले ही दिन दर्शकों का दिल जीत लिया। सिनेमाघरों में हाउसफ़ुल शो चल रहे हैं और सोशल मीडिया पर लगातार पॉज़िटिव रिव्यू आ रहे हैं।",
+    img: IMG.bollywood },
+
+  { id:6,  offset:58,  category:"तकनीक",
+    title:"इसरो के अगले चंद्र मिशन की तैयारियाँ आख़िरी दौर में, टीम को मिली नई कामयाबी",
+    summary:"वैज्ञानिकों ने मिशन के ज़मीनी परीक्षण सफलतापूर्वक पूरे कर लिए हैं। लॉन्च की तारीख़ जल्द घोषित की जाएगी।",
+    body:"स्पेस एजेंसी के अध्यक्ष ने बताया कि यान के सभी सिस्टम अपेक्षा के मुताबिक़ काम कर रहे हैं और अगले कुछ महीनों में मिशन को रवाना करने की तैयारी है। यह मिशन चंद्रमा के दक्षिणी ध्रुव पर उतरने की कोशिश करेगा।",
+    img: IMG.isro },
+
+  { id:7,  offset:72,  category:"राज्य",
+    title:"उत्तर प्रदेश में किसानों के लिए बड़ी घोषणा, गन्ना मूल्य में हुई ऐतिहासिक बढ़ोतरी",
+    summary:"राज्य सरकार ने पेराई सत्र से पहले गन्ने की समर्थन क़ीमत में इज़ाफ़ा कर किसानों को बड़ी राहत दी है।",
+    body:"मुख्यमंत्री ने कैबिनेट बैठक के बाद ऐलान किया कि गन्ना किसानों को अब पहले से बेहतर मूल्य मिलेगा। भुगतान की समयबद्ध प्रक्रिया के लिए भी सख्त निर्देश जारी किए गए हैं।",
+    img: IMG.farmer },
+
+  { id:8,  offset:88,  category:"राज्य",
+    title:"लखनऊ मेट्रो के अगले फ़ेज़ को मिली मंज़ूरी, 12 नए स्टेशन बनेंगे",
+    summary:"शहर की यातायात व्यवस्था को बड़ी राहत देते हुए सरकार ने मेट्रो के विस्तार को हरी झंडी दी है।",
+    body:"नए फ़ेज़ में लगभग 22 किलोमीटर लंबा नया कॉरिडोर बनेगा और शहर के प्रमुख इलाक़ों को जोड़ा जाएगा। परियोजना अगले चार साल में पूरी होने का लक्ष्य है।",
+    img: IMG.metro },
+
+  { id:9,  offset:105, category:"दुनिया",
+    title:"वैश्विक जलवायु सम्मेलन में भारत की बड़ी पहल, कई देशों ने किया समर्थन",
+    summary:"प्रधानमंत्री ने सम्मेलन में हरित ऊर्जा पर भारत के लक्ष्यों की जानकारी दी और नई साझेदारी की घोषणा की।",
+    body:"सम्मेलन में भारत ने 2030 तक अपनी नवीकरणीय ऊर्जा क्षमता को दोगुना करने का ऐलान किया। कई विकासशील देशों ने इस पहल का स्वागत किया है।",
+    img: IMG.world },
+
+  { id:10, offset:120, category:"तकनीक",
+    title:"नए एआई क़ानून पर सरकार का बड़ा क़दम, यूज़र डेटा की सुरक्षा होगी पहली प्राथमिकता",
+    summary:"मंत्रालय ने आर्टिफ़िशियल इंटेलिजेंस के इस्तेमाल पर विस्तृत गाइडलाइन जारी करने का फ़ैसला किया है।",
+    body:"नियम-मसौदे में कंपनियों को यह बताना होगा कि उनके एल्गोरिदम कैसे काम करते हैं और यूज़र का डेटा किन शर्तों पर लिया जा रहा है। उल्लंघन पर भारी जुर्माने का प्रावधान होगा।",
+    img: IMG.ai },
+
+  { id:11, offset:140, category:"भारत",
+    title:"उत्तर भारत में शीतलहर का प्रकोप, कई राज्यों में स्कूल बंद करने के आदेश",
+    summary:"तापमान लगातार गिरने के बीच मौसम विभाग ने अगले चार दिनों तक कड़ाके की सर्दी का अलर्ट जारी किया है।",
+    body:"दिल्ली, पंजाब, हरियाणा और उत्तर प्रदेश के कई शहरों में सुबह घना कोहरा दर्ज किया गया। कई ट्रेनें देरी से चल रही हैं और हवाई सेवाएँ भी प्रभावित हुई हैं।",
+    img: IMG.weather },
+
+  { id:12, offset:160, category:"भारत",
+    title:"CBSE बोर्ड परीक्षा 2026 का शेड्यूल जारी, इस बार डेटशीट में हुए कई बड़े बदलाव",
+    summary:"बोर्ड ने 10वीं और 12वीं की परीक्षा तिथियों की घोषणा कर दी है। छात्रों के लिए तैयारी के दिशा-निर्देश भी जारी।",
+    body:"परीक्षाएँ फरवरी के दूसरे सप्ताह से शुरू होंगी। बोर्ड ने कहा है कि इस बार व्यावहारिक परीक्षाओं की प्रक्रिया को अधिक पारदर्शी बनाया गया है।",
+    img: IMG.education },
+
+  { id:13, offset:180, category:"राज्य",
+    title:"राजधानी में नया सुपर-स्पेशियलिटी अस्पताल तैयार, अगले महीने से मरीज़ों को मिलेगी सुविधा",
+    summary:"पाँच सौ बिस्तरों वाले इस अस्पताल में कैंसर, हृदय और न्यूरो जैसी विशेष सेवाएँ एक ही छत के नीचे उपलब्ध होंगी।",
+    body:"स्वास्थ्य मंत्री ने अस्पताल का निरीक्षण किया और कहा कि यहाँ ग़रीब मरीज़ों के लिए विशेष योजनाओं के तहत मुफ़्त इलाज की भी व्यवस्था होगी।",
+    img: IMG.hospital },
+
+  { id:14, offset:210, category:"बिजनेस",
+    title:"पेट्रोल-डीज़ल की क़ीमतों में नरमी के संकेत, तेल कंपनियों ने दिए बड़े बदलाव के इशारे",
+    summary:"अंतरराष्ट्रीय बाज़ार में कच्चे तेल के दाम गिरने के बाद घरेलू बाज़ार में भी राहत की उम्मीद।",
+    body:"वित्त मंत्रालय के सूत्रों के अनुसार आने वाले दिनों में क़ीमतों की समीक्षा की जाएगी। तेल विपणन कंपनियाँ हर पंद्रह दिन में समीक्षा करती हैं।",
+    img: IMG.road },
+
+  { id:15, offset:240, category:"भारत",
+    title:"अयोध्या में श्रद्धालुओं की संख्या ने बनाया रिकॉर्ड, प्रशासन ने बढ़ाई सुविधाएँ",
+    summary:"नए साल के बाद से लगातार बढ़ रही भीड़ को देखते हुए प्रशासन ने पार्किंग, स्वास्थ्य और सुरक्षा व्यवस्था दुरुस्त की है।",
+    body:"नगर आयुक्त ने बताया कि श्रद्धालुओं की सुविधा के लिए अतिरिक्त शटल बसें, चिकित्सा शिविर और सूचना केंद्र बनाए गए हैं। सुरक्षा के लिए CCTV और ड्रोन कैमरे भी लगाए गए हैं।",
+    img: IMG.temple }
+];
+
+const catClass = { "भारत":"cat-bharat","दुनिया":"cat-duniya","राजनीति":"cat-rajniti","राज्य":"cat-bharat","खेल":"cat-khel","मनोरंजन":"cat-manoranjan","बिजनेस":"cat-business","तकनीक":"cat-tech" };
+
+/* ==========================================================================
+   LIVE TIME (updates every second) + RELATIVE TIMESTAMPS
+   ========================================================================== */
+const HI_DAYS   = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+const HI_MONTHS = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+
+function pad(n){ return n<10 ? '0'+n : ''+n; }
+
+function fmtFullDate(d){
+  return `${HI_DAYS[d.getDay()]}, ${d.getDate()} ${HI_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function fmtTime(d){
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+/* Convert minute-offset (from load) into a live relative timestamp */
+const LOAD_TIME = Date.now();
+function relativeTime(offsetMinutes){
+  const articleTime = LOAD_TIME - offsetMinutes * 60000;
+  const elapsed = Math.floor((Date.now() - articleTime) / 1000); // seconds
+  if(elapsed < 60)         return `${elapsed} सेकंड पहले`;
+  const mins = Math.floor(elapsed/60);
+  if(mins < 60)            return `${mins} मिनट पहले`;
+  const hrs = Math.floor(mins/60);
+  if(hrs < 24)             return `${hrs} घंटे पहले`;
+  const days = Math.floor(hrs/24);
+  return `${days} दिन पहले`;
+}
+
+function absoluteTime(offsetMinutes){
+  const d = new Date(LOAD_TIME - offsetMinutes * 60000);
+  return `${d.getDate()} ${HI_MONTHS[d.getMonth()]}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function updateClock(){
+  const d = new Date();
+  const clockEl = document.getElementById('liveClock');
+  const dayEl = document.getElementById('liveDay');
+  const dateEl = document.getElementById('liveDateText');
+  if(clockEl) clockEl.textContent = fmtTime(d);
+  if(dayEl)   dayEl.textContent   = fmtFullDate(d);
+  if(dateEl)  dateEl.textContent  = fmtFullDate(d) + ' • ' + fmtTime(d);
+}
+
+/* ==========================================================================
+   RENDERING
+   ========================================================================== */
+function cardHTML(item, isLead){
+  return `<div class="card ${isLead?'lead':''}" data-cat="${item.category}" data-id="${item.id}">
+    <div class="thumb">
+      <img src="${item.img}" alt="${item.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1B3FAE,#3B5FE0)';">
+      <span class="cat-tag">${item.category}</span>
+      <span class="live-tag"><span class="d"></span>LIVE</span>
+    </div>
+    <div class="card-body">
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+      <div class="meta">
+        <span>🕒 <span class="rel-time" data-offset="${item.offset}">${relativeTime(item.offset)}</span></span>
+        <span class="dot"></span>
+        <span>📅 <span class="abs-time" data-offset="${item.offset}">${absoluteTime(item.offset)}</span></span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* Rotating "featured" order — gives a real-time feel without changing content */
+let rotationTick = 0;
+function currentOrder(){
+  // Rotate the array by rotationTick so hero + rows shuffle every minute
+  const arr = newsData.slice();
+  const n = arr.length;
+  const k = rotationTick % n;
+  return arr.slice(k).concat(arr.slice(0,k));
+}
+
+function render(filterCat, searchTerm){
+  const term = (searchTerm||"").trim().toLowerCase();
+  const ordered = currentOrder();
+  let data = ordered.filter(n => (filterCat==="all"||!filterCat || n.category===filterCat) &&
+                                  (!term || n.title.toLowerCase().includes(term) || n.summary.toLowerCase().includes(term)));
+
+  const heroArea = document.getElementById('heroArea');
+  if((filterCat==="all"||!filterCat) && !term){
+    const lead = data.find(n=>n.lead) || data[0];
+    const rest = data.filter(n=>n!==lead).slice(0,2);
+    heroArea.innerHTML = cardHTML(lead, true) + `<div style="display:flex;flex-direction:column;gap:20px;">${rest.map(n=>cardHTML(n)).join("")}</div>`;
+  } else { heroArea.innerHTML = ""; }
+
+  const rowsWrap = document.getElementById('categoryRows');
+  rowsWrap.innerHTML = "";
+  if(term || (filterCat && filterCat!=="all")){
+    const title = term ? `खोज परिणाम: "${searchTerm}"` : filterCat;
+    const items = term ? data : ordered.filter(n=>n.category===filterCat);
+    const sec = document.createElement('div');
+    sec.innerHTML = `<div class="section-title">${title}</div><div class="card-row">${items.length? items.map(n=>cardHTML(n)).join("") : '<p style="color:var(--muted);padding:20px 0;">कोई खबर नहीं मिली।</p>'}</div>`;
+    rowsWrap.appendChild(sec);
+  } else {
+    const cats = ["भारत","राजनीति","दुनिया","खेल","मनोरंजन","बिजनेस","तकनीक","राज्य"];
+    cats.forEach(c=>{
+      const items = ordered.filter(n=>n.category===c);
+      if(!items.length) return;
+      const sec = document.createElement('div');
+      sec.innerHTML = `<div class="section-title">${c}</div><div class="card-row">${items.map(n=>cardHTML(n)).join("")}</div>`;
+      rowsWrap.appendChild(sec);
+    });
+  }
+  observeReveals();
+}
+
+function renderTrending(){
+  const list = document.getElementById('trendingList');
+  const top = currentOrder().slice(0,6);
+  list.innerHTML = top.map((n,i)=>`
+    <div class="trend-item">
+      <div class="trend-num">${i+1}</div>
+      <div class="trend-text">
+        <a data-cat="${n.category}">${n.title}</a>
+        <div class="t-meta">${n.category} • <span class="rel-time" data-offset="${n.offset}">${relativeTime(n.offset)}</span></div>
+      </div>
+    </div>`).join("");
+}
+
+function renderTicker(){
+  const track = document.getElementById('tickerTrack');
+  const items = newsData.map(n=>`<span>● ${n.title}</span>`);
+  track.innerHTML = items.join("") + items.join("");
+}
+
+/* Refresh only the time-strings across the page — cheap, keeps content stable */
+function refreshTimestamps(){
+  document.querySelectorAll('.rel-time').forEach(el=>{
+    const off = parseInt(el.getAttribute('data-offset'),10);
+    if(!isNaN(off)) el.textContent = relativeTime(off);
+  });
+  document.querySelectorAll('.abs-time').forEach(el=>{
+    const off = parseInt(el.getAttribute('data-offset'),10);
+    if(!isNaN(off)) el.textContent = absoluteTime(off);
+  });
+}
+
+/* Scroll reveal */
+let _io;
+function observeReveals(){
+  if(!('IntersectionObserver' in window)){ document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); return; }
+  if(!_io){
+    _io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); _io.unobserve(en.target); } });
+    }, { threshold:.12 });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>_io.observe(el));
+}
+
+/* Category clicks */
+let currentCat = "all";
+let currentSearch = "";
+document.addEventListener('click', (e)=>{
+  const el = e.target.closest('[data-cat]');
+  if(!el) return;
+  e.preventDefault();
+  document.querySelectorAll('.nav-bar a').forEach(a=>a.classList.remove('active'));
+  const navMatch = document.querySelector(`.nav-bar a[data-cat="${el.dataset.cat}"]`);
+  if(navMatch) navMatch.classList.add('active');
+  const box = document.getElementById('searchBox');
+  if(box) box.value = "";
+  currentSearch = "";
+  currentCat = el.dataset.cat;
+  render(currentCat, "");
+  const nav = document.querySelector('.nav-bar');
+  if(nav) window.scrollTo({ top: nav.offsetTop, behavior:'smooth' });
+});
+
+document.getElementById('searchBox').addEventListener('input', (e)=>{
+  document.querySelectorAll('.nav-bar a').forEach(a=>a.classList.remove('active'));
+  currentCat = "all";
+  currentSearch = e.target.value;
+  render("all", currentSearch);
+});
+
+/* ==========================================================================
+   INIT & LIVE LOOPS
+   ========================================================================== */
+document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+renderSocials();
+renderTicker();
+renderTrending();
+render("all","");
+updateClock();
+observeReveals();
+
+/* 1s — clock */
+setInterval(updateClock, 1000);
+
+/* 15s — refresh relative "X minute ago" strings across cards */
+setInterval(() => {
+  refreshTimestamps();
+  const el = document.getElementById('lastUpdate');
+  if(el) el.textContent = 'अभी-अभी';
+}, 15000);
+
+/* 45s — mark "अंतिम अपडेट" as elapsed */
+setInterval(() => {
+  const el = document.getElementById('lastUpdate');
+  if(!el) return;
+  // count seconds since last "अभी-अभी" tick
+  el.textContent = 'कुछ पल पहले';
+}, 45000);
+
+/* 60s — rotate featured order to keep page feeling live */
+setInterval(() => {
+  rotationTick += 1;
+  renderTrending();
+  render(currentCat, currentSearch);
+}, 60000);
+</script>
+</body>
+</html>
