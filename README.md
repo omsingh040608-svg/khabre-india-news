@@ -14,8 +14,11 @@
 4. एक-दो मिनट बाद आपकी site live होगी: `https://<your-username>.github.io/<repo-name>/`
 
 ## Files
-- `index.html` — पूरी website (news data, styles, live clock, सब कुछ इसी में है)
+- `index.html` — homepage (styles, news cards, trending, follow buttons, live clock)
+- `article.html` — पूरी खबर पढ़ने का dedicated page (`article.html?id=N`)
+- `news-data.js` — shared news data (images + full article bodies) — index.html & article.html दोनों load करते हैं
 - `logo.png` — brand logo
+- `anupam-parihar.jpg` — संपादक अनुपम परिहार का फोटो (हमारी टीम)
 
 ## News कैसे update करें
 `index.html` में `newsData` array (लगभग line 550 के आस-पास) खोलें और अपनी खबर जोड़ें/बदलें:

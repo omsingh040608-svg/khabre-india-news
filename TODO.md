@@ -34,3 +34,13 @@
 - [x] 27. index.html: verify/fix search ↔ category filter interaction (search resets category & vice-versa)
 - [x] 28. Verify: homepage renders, article?id=1 works, all new articles (16–20) load, no console errors
 
+## New Batch — Mobile polish (headline, trending, follow, date/time)
+- [x] 29. Phone: remove 3-line headline clamp → full headline always visible (verified: no clamp on h3; added defensive no-clamp rule)
+- [x] 30. Trending: 2-line clamp for clean titles (verified: `.trend-text a` has -webkit-line-clamp:2)
+- [x] 31. Follow us: compact 2-column pill buttons (YouTube/Instagram/Facebook/X), no full-width red line (verified grid 1fr 1fr + filtered list; changed radius 10px → 999px pill)
+- [x] 32. Date & time: single small line (date • time) above search bar; remove old big top strip (verified `.dt-line` above search box)
+- [x] 33. index.html: `.follow-btn` → true pill (border-radius:999px) + compact padding
+- [x] 34. index.html: defensive no-clamp on `.card-body h3` (display:block; overflow:visible) so full headline always shows
+- [x] 35. README.md: file list updated to current structure
+- [ ] 36. Final verify on phone — full headlines, 2-line trending, pill follow grid, small date/time line
+
