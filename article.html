@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=yes, email=yes, address=no">
+<title>ख़बरें इंडिया न्यूज़ | खबर</title>
+<meta name="description" content="ख़बरें इंडिया न्यूज़ — पूरी खबर पढ़ें। निष्पक्ष, तेज़ और भरोसेमंद पत्रकारिता।">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1B3FAE; --blue-deep:#122B7E; --red:#E30613; --ink:#16181D;
+    --paper:#F6F5F1; --paper-dim:#EDEBE4; --muted:#6B7280; --gold:#C9971F;
+    --line:#DEDBD1; --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+  body{
+    font-family:'Hind',sans-serif;background:var(--paper);color:var(--ink);
+    line-height:1.5;overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px;}
+  h1,h2,h3,.brand,.nav a,.section-title{font-family:'Baloo 2',sans-serif;}
+
+  /* Mini top bar */
+  .art-bar{
+    background:var(--blue-deep);color:#fff;position:sticky;top:0;z-index:40;
+    box-shadow:0 2px 12px rgba(18,43,126,.18);
+  }
+  .art-bar-inner{display:flex;align-items:center;gap:12px;padding:10px 0;}
+  .back-btn{
+    display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);color:#fff;font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;
+    transition:background .2s ease,transform .2s ease;flex-shrink:0;
+  }
+  .back-btn:hover{background:var(--red);}
+  .back-btn:active{transform:scale(.96);}
+  .art-bar .mini-brand{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;line-height:1.2;flex:1;}
+  .art-bar .mini-brand small{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.4px;}
+
+  /* Hero image */
+  .art-hero{width:100%;max-height:56vh;min-height:220px;overflow:hidden;background:#0b1230;position:relative;}
+  .art-hero img{width:100%;height:100%;max-height:56vh;min-height:220px;object-fit:cover;display:block;}
+  .art-hero .cat-tag{
+    position:absolute;top:14px;left:14px;background:var(--red);color:#fff;font-size:12.5px;font-weight:700;
+    padding:5px 14px;border-radius:999px;font-family:'Inter',sans-serif;letter-spacing:.4px;z-index:2;
+  }
+
+  /* Article body */
+  .art-body{padding:24px 0 48px;background:var(--paper);}
+  .art-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px 26px 34px;box-shadow:0 6px 24px rgba(20,30,60,.06);margin-top:-24px;position:relative;z-index:3;}
+  .art-card h1{font-size:26px;line-height:1.4;color:var(--blue-deep);margin-bottom:12px;}
+  .art-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line);}
+  .art-meta .dot{width:4px;height:4px;background:#c8c8c8;border-radius:50%;align-self:center;}
+  .art-content p{font-size:17px;line-height:1.9;color:#26292f;margin-bottom:16px;}
+
+  .share-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);}
+  .share-row span{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--muted);}
+  .share-btn{
+    display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;flex-shrink:0;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .share-btn:active{transform:scale(.95);}
+  .share-wa{background:#25D366;}
+  .share-other{background:var(--blue);}
+
+  .more-news{margin-top:30px;}
+  .more-news h3{font-size:19px;color:var(--blue-deep);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .more-news h3::before{content:"";width:5px;height:18px;background:var(--red);border-radius:2px;}
+  .more-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:560px){.more-grid{grid-template-columns:1fr;}}
+  .mini-card{background:var(--white);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow .25s ease,transform .25s ease;}
+  .mini-card:hover{box-shadow:0 10px 22px rgba(20,30,60,.12);transform:translateY(-3px);}
+  .mini-card .m-thumb{width:100%;aspect-ratio:16/9;background:#0b1230;overflow:hidden;}
+  .mini-card .m-thumb img{width:100%;height:100%;object-fit:cover;}
+  .mini-card .m-body{padding:12px 14px;}
+  .mini-card .m-body h4{font-size:15px;line-height:1.4;color:var(--ink);font-family:'Hind',sans-serif;font-weight:600;}
+
+  @media (max-width:480px){
+    .wrap{padding:0 14px;}
+    .art-hero{min-height:200px;}
+    .art-hero img{min-height:200px;}
+    .art-card{padding:18px 16px 26px;border-radius:12px;}
+    .art-card h1{font-size:21px;}
+    .art-content p{font-size:16px;line-height:1.85;}
+    .more-grid{grid-template-columns:1fr;}
+  }
+
+  .bottom-bar{border-top:1px solid var(--line);padding:18px 14px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);text-align:center;background:var(--white);}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="art-bar">
+  <div class="wrap art-bar-inner">
+    <a class="back-btn" href="index.html" aria-label="वापस जाएँ">← <span>वापस</span></a>
+    <div class="mini-brand">ख़बरें इंडिया न्यूज़<small>आवाज़ जन गण मन की</small></div>
+  </div>
+</div>
+
+<!-- Hero image -->
+<div class="art-hero" id="artHero">
+  <img src="logo.png" alt="ख़बरें इंडिया न्यूज़" id="artHeroImg">
+  <span class="cat-tag" id="artCat">भारत</span>
+</div>
+
+<!-- Article -->
+<div class="art-body">
+  <div class="wrap">
+    <div class="art-card">
+      <h1 id="artTitle"></h1>
+      <div class="art-meta">
+        <span id="artTime"></span>
+        <span class="dot"></span>
+        <span id="artDate"></span>
+        <span class="dot"></span>
+        <span>✍ ख़बरें इंडिया डेस्क</span>
+      </div>
+      <div class="art-content" id="artContent"></div>
+
+      <div class="share-row">
+        <span>शेयर करें:</span>
+        <a class="share-btn share-wa" id="shareWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-btn share-other" id="shareOther" href="#" target="_blank" rel="noopener">अन्य ऐप्स</a>
+      </div>
+    </div>
+
+    <div class="more-news">
+      <h3>और ख़बरें</h3>
+      <div class="more-grid" id="moreGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">© <span id="yearNow"></span> Khabre India News — सर्वाधिकार सुरक्षित।</div>
+
+<script src="news-data.js"></script>
+<script>
+/* ===== helpers ===== */
+function pad(n){ return n<10 ? '0'+n : ''+n; }
+const HI_DAYS   = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+const HI_MONTHS = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+const LOAD_TIME = Date.now();
+
+function relativeTime(offsetMinutes){
+  const articleTime = LOAD_TIME - offsetMinutes * 60000;
+  const elapsed = Math.floor((Date.now() - articleTime) / 1000);
+  if(elapsed < 60) return `${elapsed} सेकंड पहले`;
+  const mins = Math.floor(elapsed/60);
+  if(mins < 60)  return `${mins} मिनट पहले`;
+  const hrs = Math.floor(mins/60);
+  if(hrs < 24)   return `${hrs} घंटे पहले`;
+  return `${Math.floor(hrs/24)} दिन पहले`;
+}
+function absoluteTime(offsetMinutes){
+  const d = new Date(LOAD_TIME - offsetMinutes * 60000);
+  return `${d.getDate()} ${HI_MONTHS[d.getMonth()]} ${d.getFullYear()} • ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function thumbOf(url){ return (url||'').replace('w=1200&q=70','w=400&q=60'); }
+
+document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+/* ===== get id from URL ===== */
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'), 10);
+const item = newsData.find(n => n.id === id) || newsData[0];
+const idx = newsData.findIndex(n => n.id === item.id);
+
+/* ===== fill article ===== */
+document.title = item.title + " | ख़बरें इंडिया न्यूज़";
+document.getElementById('artHeroImg').src = item.img;
+document.getElementById('artHeroImg').alt = item.title;
+document.getElementById('artCat').textContent = item.category;
+document.getElementById('artTitle').textContent = item.title;
+document.getElementById('artTime').textContent = "🕒 " + relativeTime(item.offset);
+document.getElementById('artDate').textContent = "📅 " + absoluteTime(item.offset);
+document.getElementById('artContent').innerHTML = `<p>${item.summary}</p><p>${item.body}</p>`;
+
+/* ===== share ===== */
+const shareURL = encodeURIComponent(window.location.href);
+const shareText = encodeURIComponent(item.title);
+document.getElementById('shareWa').href = `https://wa.me/?text=${shareText}%20${shareURL}`;
+document.getElementById('shareOther').href = `https://api.whatsapp.com/send?text=${shareText}%20${shareURL}`;
+
+/* ===== more news ===== */
+const others = newsData.filter(n => n.id !== item.id).slice(0,4);
+document.getElementById('moreGrid').innerHTML = others.map(n => `
+  <a class="mini-card" href="article.html?id=${n.id}">
+    <div class="m-thumb"><img src="${thumbOf(n.img)}" alt="${n.title}" loading="lazy"></div>
+    <div class="m-body"><h4>${n.title}</h4></div>
+  </a>`).join("");
+</script>
+</body>
+</html>
+

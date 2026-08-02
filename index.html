@@ -105,26 +105,18 @@
   .ticker:hover .ticker-track{animation-play-state:paused;}
   @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-  /* Live time strip */
+  /* Live date & time strip */
   .live-strip{
     background:linear-gradient(90deg,#122B7E 0%,#1B3FAE 55%,#E30613 100%);
     color:#fff;font-family:'Inter',sans-serif;
   }
   .live-strip .wrap{
-    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    display:flex;align-items:center;justify-content:center;gap:14px;
     padding:10px 20px;flex-wrap:wrap;
   }
-  .live-strip .live-badge{
-    display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
-    padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:1px;
-    border:1px solid rgba(255,255,255,.28);
-  }
-  .live-strip .live-badge .live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 1.4s infinite;box-shadow:0 0 0 3px rgba(34,197,94,.28);}
   .live-strip .time-block{display:flex;align-items:center;gap:14px;font-weight:600;font-size:15px;}
   .live-strip .time-block .clock{font-family:'Baloo 2',sans-serif;font-size:22px;font-weight:800;letter-spacing:1px;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.25);}
   .live-strip .time-block .day{opacity:.9;font-size:13.5px;}
-  .live-strip .update-info{font-size:12.5px;opacity:.9;}
-  .live-strip .update-info b{color:#ffe97a;}
 
   /* Nav */
   .nav-bar{background:var(--blue);position:sticky;top:0;z-index:40;box-shadow:0 2px 12px rgba(18,43,126,.18);}
@@ -174,40 +166,6 @@
   .card-row{display:flex;gap:20px;overflow-x:auto;padding-bottom:8px;}
   .card-row .card{min-width:290px;flex:0 0 auto;}
   .card-row .card .card-body h3{font-size:16.5px;}
-
-  /* News Modal */
-  .modal-overlay{
-    position:fixed;inset:0;background:rgba(10,15,35,.72);backdrop-filter:blur(4px);
-    display:flex;align-items:flex-end;justify-content:center;z-index:100;padding:0;
-    opacity:0;pointer-events:none;transition:opacity .3s ease;
-  }
-  .modal-overlay.open{opacity:1;pointer-events:auto;}
-  .modal-box{
-    background:var(--paper);width:100%;max-width:760px;max-height:92vh;max-height:92dvh;overflow-y:auto;
-    border-radius:18px 18px 0 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.7,.2,1);
-    box-shadow:0 -10px 40px rgba(0,0,0,.35);
-  }
-  .modal-overlay.open .modal-box{transform:translateY(0);}
-  .modal-thumb{width:100%;aspect-ratio:16/9;position:relative;background:#0b1230;overflow:hidden;}
-  .modal-thumb img{width:100%;height:100%;object-fit:cover;}
-  .modal-thumb .cat-tag{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;font-family:'Inter',sans-serif;z-index:2;}
-  .modal-close{
-    position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;
-    background:rgba(0,0,0,.55);color:#fff;font-size:20px;font-weight:700;z-index:3;
-    display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);
-    transition:background .2s ease,transform .2s ease;
-  }
-  .modal-close:hover{background:var(--red);transform:scale(1.08);}
-  .modal-content{padding:22px 24px 32px;}
-  .modal-content h2{font-family:'Baloo 2',sans-serif;font-size:24px;line-height:1.35;color:var(--blue-deep);margin-bottom:12px;}
-  .modal-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line);}
-  .modal-content p{font-size:16px;line-height:1.85;color:#2a2d34;margin-bottom:14px;}
-  @media (max-width:480px){
-    .modal-box{border-radius:14px 14px 0 0;}
-    .modal-content{padding:18px 18px 26px;}
-    .modal-content h2{font-size:20px;}
-    .modal-content p{font-size:15px;}
-  }
 
   /* search / filter */
   .filter-bar{display:flex;gap:10px;align-items:center;margin:0 0 6px;flex-wrap:wrap;}
@@ -299,9 +257,26 @@
   .fl-inner .contact-line{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;font-size:14px;color:#c3cae3;}
   .fl-inner .contact-line a{color:#fff;text-decoration:underline;}
   .fl-inner .contact-line a:hover{color:var(--gold);}
+  .fl-team{margin-top:16px;border-top:1px dashed rgba(255,255,255,.2);padding-top:16px;}
+  .fl-team h4{color:var(--gold);font-family:'Baloo 2',sans-serif;font-size:17px;margin-bottom:12px;}
+  .fl-team-card{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;}
+  @media (max-width:480px){.fl-team-card{grid-template-columns:1fr;text-align:center;justify-items:center;}}
+  .fl-team-avatar{
+    width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#E3B94A);color:var(--blue-deep);
+    display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',sans-serif;font-size:30px;font-weight:800;
+    flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,.3);overflow:hidden;position:relative;
+  }
+  .fl-team-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+  .fl-team-card h5{color:#fff;font-size:18px;margin-bottom:2px;}
+  .fl-team-card .role{color:var(--gold);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.3px;margin-bottom:10px;}
+  .fl-team-card p{font-size:13.5px;line-height:1.75;color:#c3cae3;margin-bottom:8px;}
+  .fl-team-quote{
+    grid-column:1/-1;border-left:3px solid var(--gold);background:rgba(255,255,255,.05);
+    padding:12px 16px;border-radius:8px;font-style:italic;color:#fff;font-size:14px;line-height:1.75;
+  }
+  .fl-team-quote b{color:var(--gold);}
 
-
-  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px;padding:34px 0;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;padding:34px 0;}
   @media (max-width:800px){.footer-grid{grid-template-columns:1fr;}}
   .footer-grid h5{color:#fff;font-family:'Baloo 2',sans-serif;font-size:16px;margin-bottom:14px;}
   .footer-grid p, .footer-grid a{font-size:14px;color:#c3cae3;line-height:1.8;}
@@ -318,6 +293,23 @@
   .cat-links a:hover{color:#fff;padding-left:4px;}
   .bottom-bar{border-top:1px solid rgba(255,255,255,.14);padding:16px 0;font-family:'Inter',sans-serif;font-size:12.5px;color:#9aa4c7;text-align:center;}
 
+  /* ===== Mobile: compact horizontal news cards (small image, fast load) ===== */
+  @media (max-width:640px){
+    .hero-grid{display:flex;flex-direction:column;gap:14px;}
+    .card{display:flex;flex-direction:row;align-items:stretch;border-radius:8px;}
+    .card .thumb{width:132px;min-width:132px;height:104px;aspect-ratio:auto;}
+    .card .thumb::after{display:none;}
+    .card .thumb .cat-tag{top:6px;left:6px;font-size:9.5px;padding:3px 7px;}
+    .card-body{padding:10px 12px;display:flex;flex-direction:column;justify-content:center;}
+    .card-body h3{font-size:15.5px;margin-bottom:5px;}
+    .card.lead .card-body h3{font-size:16.5px;}
+    .card-body p{font-size:13px;margin-bottom:6px;-webkit-line-clamp:2;}
+    .meta{font-size:11px;gap:8px;}
+    .card-row .card{min-width:258px;}
+    .card-row .card .thumb{width:110px;min-width:110px;height:96px;}
+    .card-row .card .card-body h3{font-size:14.5px;}
+  }
+
   /* ===== Small-phone polish: keep everything stable, no overflow ===== */
   @media (max-width:480px){
     .wrap{padding:0 14px;}
@@ -333,13 +325,10 @@
     .ticker-label{padding:0 11px;font-size:12px;}
     .ticker-track{font-size:13.5px;gap:34px;}
     .live-strip .wrap{justify-content:center;padding:9px 14px;}
-    .live-strip .update-info{width:100%;text-align:center;}
     .nav-bar a{padding:12px 13px;font-size:14.5px;}
     .layout{padding:22px 0 6px;gap:26px;}
     .section-title{font-size:18px;margin:28px 0 12px;}
-    .card.lead .card-body h3{font-size:19px;}
-    .card-body{padding:13px 15px 15px;}
-    .card-body h3{font-size:16.5px;}
+    .card .thumb{width:122px;min-width:122px;height:98px;}
     .editor-card{gap:18px;}
     .editor-avatar{width:88px;height:88px;}
     .editor-card h4{font-size:19px;}
@@ -373,25 +362,13 @@
   </div>
 </div>
 
-<!-- Ticker -->
-<div class="ticker">
-  <div class="wrap">
-    <div class="ticker-label"><span class="pulse-dot"></span> ताज़ा ख़बरें</div>
-    <div class="ticker-track-outer">
-      <div class="ticker-track" id="tickerTrack"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Live Time Strip -->
+<!-- Live Date & Time Strip -->
 <div class="live-strip">
   <div class="wrap">
-    <span class="live-badge"><span class="live-dot"></span> LIVE</span>
     <div class="time-block">
       <span class="day" id="liveDay"></span>
       <span class="clock" id="liveClock">--:--:--</span>
     </div>
-    <div class="update-info">अंतिम अपडेट: <b id="lastUpdate">अभी-अभी</b></div>
   </div>
 </div>
 
@@ -407,6 +384,16 @@
     <a data-cat="मनोरंजन">मनोरंजन</a>
     <a data-cat="बिजनेस">बिजनेस</a>
     <a data-cat="तकनीक">तकनीक</a>
+  </div>
+</div>
+
+<!-- Ticker (just below nav) -->
+<div class="ticker">
+  <div class="wrap">
+    <div class="ticker-label"><span class="pulse-dot"></span> ताज़ा ख़बरें</div>
+    <div class="ticker-track-outer">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
   </div>
 </div>
 
@@ -445,38 +432,12 @@
 
 <!-- Footer -->
 <footer>
-  <div class="wrap editor-section reveal">
-    <div class="editor-head">
-      <h3>हमारे संपादक</h3>
-      <span class="bar"></span>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar"><img src="anupam-parihar.jpg" alt="अनुपम परिहार — संपादक" onerror="this.style.display='none';this.parentNode.querySelector('.ap-fallback').style.display='flex';"><span class="ap-fallback">AP</span></div>
-      <div>
-        <h4>अनुपम परिहार</h4>
-        <div class="role">संपादक (Editor) — ख़बरें इंडिया न्यूज़</div>
-        <p>अनुपम परिहार भारतीय पत्रकारिता जगत में एक भरोसेमंद और सम्मानित नाम हैं। ज़मीनी रिपोर्टिंग से अपने करियर की शुरुआत करने वाले अनुपम ने निष्पक्ष, तथ्यपरक और साहसिक पत्रकारिता को हमेशा अपना मूल सिद्धांत बनाया। उन्होंने <b>ख़बरें इंडिया न्यूज़</b> की स्थापना इसी दृढ़ सोच के साथ की — कि हर खबर जनता तक बिना किसी दबाव, पक्षपात और मिलावट के पहुँचे।</p>
-        <p>लखनऊ स्थित मुख्यालय से संचालित यह न्यूज़ प्लेटफ़ॉर्म उनके नेतृत्व में भारत, राजनीति, समाज, खेल, बिजनेस और मनोरंजन जैसे विषयों पर गहराई और संवेदनशीलता के साथ रिपोर्टिंग करता है। उनका दृढ़ विश्वास है कि पत्रकारिता केवल सूचना देने का माध्यम नहीं, बल्कि समाज के प्रति एक बड़ी ज़िम्मेदारी है — जो सच को सामने लाने और आम आदमी की आवाज़ बनने का दायित्व निभाती है।</p>
-        <p class="quote">"आवाज़ जन गण मन की" — इसी टैगलाइन के साथ अनुपम परिहार आम जनता की आवाज़ को सही मंच तक पहुँचाने के लिए प्रतिबद्ध हैं, और अपनी पूरी टीम को सटीक, संतुलित एवं समयबद्ध रिपोर्टिंग के लिए निरंतर प्रेरित करते हैं।</p>
-      </div>
-    </div>
-  </div>
-
   <div class="wrap footer-grid">
     <div class="reveal">
       <img src="logo.png" alt="ख़बरें इंडिया न्यूज़ लोगो" class="footer-brand-logo">
       <h5>ख़बरें इंडिया न्यूज़</h5>
       <p>आवाज़ जन गण मन की — निष्पक्ष, तेज़ और भरोसेमंद पत्रकारिता।</p>
       <div class="foot-social" id="footerSocial"></div>
-    </div>
-    <div class="reveal">
-      <h5>संपर्क करें</h5>
-      <div class="contact-line">📍 <span>A1, वज़ीर हसन रोड, लखनऊ</span></div>
-      <div class="contact-line">☎ <span>ऑफिस नं.: <a href="tel:9651328100">9651328100</a></span></div>
-      <div class="contact-line">📞 <span>संपादक: <a href="tel:+918305117578">+91 83051 17578</a></span></div>
-      <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918318880819" href="https://wa.me/918318880819" target="_blank" rel="noopener">+91 83188 80819</a></span></div>
-      <div class="contact-line">✉ <span><a href="mailto:anupam03singh1998@gmail.com">anupam03singh1998@gmail.com</a></span></div>
-      <div class="contact-line">✉ <span><a href="mailto:Indianewskhabre@gmail.com">Indianewskhabre@gmail.com</a></span></div>
     </div>
     <div class="reveal cat-links">
       <h5>श्रेणियाँ</h5>
@@ -493,6 +454,7 @@
     <div class="wrap">
       <div class="fl-links">
         <a class="fl-scroll" data-fl="about">हमारे बारे में</a>
+        <a class="fl-scroll" data-fl="contact">संपर्क करें</a>
         <a class="fl-scroll" data-fl="privacy">गोपनीयता नीति</a>
         <a class="fl-scroll" data-fl="terms">उपयोग की शर्तें</a>
         <a class="fl-scroll" data-fl="cookies">कुकीज़</a>
@@ -500,7 +462,7 @@
       </div>
 
       <div class="fl-item" id="fl-about">
-        <button class="fl-head" onclick="toggleFL('fl-about')">हमारे बारे में (About Khabre India)<span class="arrow">▼</span></button>
+        <button class="fl-head" onclick="toggleFL('fl-about')">हमारे बारे में<span class="arrow">▼</span></button>
         <div class="fl-body"><div class="fl-inner">
           <h4>"आवाज़ आपकी, मेहनत हमारी"</h4>
           <p>हम निभाते हैं मीडिया होने का कर्तव्य — जनता से, जनता की ओर, जनता के लिए। <b>Khabre INDIA</b> – आवाज़ जन-गण-मन की।</p>
@@ -514,11 +476,38 @@
             <li><span class="chk">✓</span><span><b>निष्पक्ष, तेज़ और तथ्यात्मक पत्रकारिता</b> — जनता की आवाज़ बनने का दायित्व।</span></li>
           </ul>
           <div class="hashtag">#Khabre_INDIA — आवाज़ जन-गण-मन की।</div>
+
+          <div class="fl-team">
+            <h4>हमारी टीम</h4>
+            <div class="fl-team-card">
+              <div class="fl-team-avatar"><img src="anupam-parihar.jpg" alt="अनुपम परिहार — संपादक" onerror="this.style.display='none';this.textContent='AP';"><span>AP</span></div>
+              <div>
+                <h5>अनुपम परिहार</h5>
+                <div class="role">संपादक (Editor) — ख़बरें इंडिया न्यूज़</div>
+                <p>अनुपम परिहार भारतीय पत्रकारिता जगत में एक भरोसेमंद और सम्मानित नाम हैं। ज़मीनी रिपोर्टिंग से अपने करियर की शुरुआत करने वाले अनुपम ने निष्पक्ष, तथ्यपरक और साहसिक पत्रकारिता को हमेशा अपना मूल सिद्धांत बनाया।</p>
+                <p>लखनऊ स्थित मुख्यालय से संचालित यह न्यूज़ प्लेटफ़ॉर्म उनके नेतृत्व में भारत, राजनीति, समाज, खेल, बिजनेस और मनोरंजन जैसे विषयों पर गहराई और संवेदनशीलता के साथ रिपोर्टिंग करता है।</p>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="fl-item" id="fl-contact">
+        <button class="fl-head" onclick="toggleFL('fl-contact')">संपर्क करें<span class="arrow">▼</span></button>
+        <div class="fl-body"><div class="fl-inner">
+          <h4>हमसे जुड़ें</h4>
+          <div class="contact-line">📍 <span>A1, वज़ीर हसन रोड, लखनऊ</span></div>
+          <div class="contact-line">☎ <span>ऑफिस नं.: <a href="tel:9651328100">9651328100</a></span></div>
+          <div class="contact-line">📞 <span>संपादक: <a href="tel:+918305117578">+91 83051 17578</a></span></div>
+          <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918318880819" href="https://wa.me/918318880819" target="_blank" rel="noopener">+91 83188 80819</a></span></div>
+          <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918305117578" href="https://wa.me/918305117578" target="_blank" rel="noopener">+91 83051 17578</a></span></div>
+          <div class="contact-line">✉ <span><a href="mailto:anupam03singh1998@gmail.com">anupam03singh1998@gmail.com</a></span></div>
+          <div class="contact-line">✉ <span><a href="mailto:Indianewskhabre@gmail.com">Indianewskhabre@gmail.com</a></span></div>
         </div></div>
       </div>
 
       <div class="fl-item" id="fl-privacy">
-        <button class="fl-head" onclick="toggleFL('fl-privacy')">गोपनीयता नीति (Privacy Policy)<span class="arrow">▼</span></button>
+        <button class="fl-head" onclick="toggleFL('fl-privacy')">गोपनीयता नीति<span class="arrow">▼</span></button>
         <div class="fl-body"><div class="fl-inner">
           <h4>आपकी जानकारी की सुरक्षा</h4>
           <p><b>Khabre INDIA</b> आपकी निजता का पूरा सम्मान करता है। हम आपकी व्यक्तिगत जानकारी को सुरक्षित रखने के लिए प्रतिबद्ध हैं।</p>
@@ -532,7 +521,7 @@
       </div>
 
       <div class="fl-item" id="fl-terms">
-        <button class="fl-head" onclick="toggleFL('fl-terms')">उपयोग की शर्तें (Terms of Use)<span class="arrow">▼</span></button>
+        <button class="fl-head" onclick="toggleFL('fl-terms')">उपयोग की शर्तें<span class="arrow">▼</span></button>
         <div class="fl-body"><div class="fl-inner">
           <h4>उपयोग की शर्तें</h4>
           <p><b>Khabre INDIA</b> वेबसाइट का उपयोग करके आप निम्नलिखित शर्तों से सहमत होते हैं:</p>
@@ -546,10 +535,10 @@
       </div>
 
       <div class="fl-item" id="fl-cookies">
-        <button class="fl-head" onclick="toggleFL('fl-cookies')">कुकीज़ (Cookies)<span class="arrow">▼</span></button>
+        <button class="fl-head" onclick="toggleFL('fl-cookies')">कुकीज़<span class="arrow">▼</span></button>
         <div class="fl-body"><div class="fl-inner">
           <h4>कुकीज़ क्या हैं?</h4>
-          <p>कुकीज़ छोटी फ़ाइलें होती हैं जो आपके डिवाइस पर सहेजी जाती हैं। हम और हमारे साझेदार वेबसाइट के प्रदर्शन, आपकी पसंद और विज्ञापनों को अनुकूलित करने के लिए कुकीज़ का उपयोग करते हैं।</p>
+          <p>कुकीज़ छोटी फ़ाइलें होती हैं जो आपके डिवाइस पर सहेजी जाती हैं। हम और हमारे साथी वेबसाइट के प्रदर्शन, आपकी पसंद और विज्ञापनों को अनुकूलित करने के लिए कुकीज़ का उपयोग करते हैं।</p>
           <ul>
             <li><span class="chk">✓</span><span><b>ज़रूरी कुकीज़</b> — वेबसाइट के बुनियादी कार्यों के लिए आवश्यक।</span></li>
             <li><span class="chk">✓</span><span><b>एनालिटिक्स कुकीज़</b> — यह समझने के लिए कि आगंतुक वेबसाइट का उपयोग कैसे करते हैं।</span></li>
@@ -577,24 +566,6 @@
 
   <div class="bottom-bar">© <span id="yearNow"></span> Khabre India News — ख़बरें इंडिया न्यूज़। सर्वाधिकार सुरक्षित।</div>
 </footer>
-
-<!-- News Modal -->
-<div class="modal-overlay" id="newsModal">
-  <div class="modal-box">
-    <div class="modal-thumb" id="modalThumb"></div>
-    <div class="modal-content">
-      <h2 id="modalTitle"></h2>
-      <div class="modal-meta">
-        <span id="modalCat"></span>
-        <span class="dot"></span>
-        <span id="modalTime"></span>
-        <span class="dot"></span>
-        <span id="modalDate"></span>
-      </div>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-</div>
 
 <script>
 /* ==========================================================================
@@ -718,6 +689,11 @@ const IMG = {
   road:        'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1200&q=70',
   temple:      'https://images.unsplash.com/photo-1524492514790-8d0c53d0b3b3?auto=format&fit=crop&w=1200&q=70'
 };
+
+/* Small/light version of the same image for homepage cards (fast load on phone) */
+function thumbOf(url){
+  return (url || '').replace('w=1200&q=70','w=400&q=60');
+}
 
 /* minute offsets used to keep timestamps rolling (relative to page load) */
 const newsData = [
@@ -853,19 +829,17 @@ function updateClock(){
   const d = new Date();
   const clockEl = document.getElementById('liveClock');
   const dayEl = document.getElementById('liveDay');
-  const dateEl = document.getElementById('liveDateText');
   if(clockEl) clockEl.textContent = fmtTime(d);
   if(dayEl)   dayEl.textContent   = fmtFullDate(d);
-  if(dateEl)  dateEl.textContent  = fmtFullDate(d) + ' • ' + fmtTime(d);
 }
 
 /* ==========================================================================
    RENDERING
    ========================================================================== */
 function cardHTML(item, isLead){
-  return `<div class="card ${isLead?'lead':''}" data-cat="${item.category}" data-id="${item.id}" onclick="openNews(${item.id})">
+  return `<div class="card ${isLead?'lead':''}" data-cat="${item.category}" data-id="${item.id}" onclick="window.location.href='article.html?id=${item.id}'">
     <div class="thumb">
-      <img src="${item.img}" alt="${item.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1B3FAE,#3B5FE0)';">
+      <img src="${thumbOf(item.img)}" alt="${item.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1B3FAE,#3B5FE0)';">
       <span class="cat-tag">${item.category}</span>
     </div>
     <div class="card-body">
@@ -880,34 +854,10 @@ function cardHTML(item, isLead){
   </div>`;
 }
 
-/* Open full news in modal on tap */
+/* Open full news on a separate article page */
 function openNews(id){
-  const item = newsData.find(n=>n.id===id);
-  if(!item) return;
-  document.getElementById('modalThumb').innerHTML =
-    `<img src="${item.img}" alt="${item.title}" onerror="this.style.display='none';">` +
-    `<span class="cat-tag">${item.category}</span>` +
-    `<button class="modal-close" onclick="closeNews()" aria-label="बंद करें">✕</button>`;
-  document.getElementById('modalTitle').textContent = item.title;
-  document.getElementById('modalCat').textContent = item.category;
-  document.getElementById('modalTime').textContent = relativeTime(item.offset);
-  document.getElementById('modalDate').textContent = absoluteTime(item.offset);
-  document.getElementById('modalBody').innerHTML = `<p>${item.summary}</p><p>${item.body}</p>`;
-  const overlay = document.getElementById('newsModal');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  window.location.href = 'article.html?id=' + id;
 }
-function closeNews(){
-  const overlay = document.getElementById('newsModal');
-  if(overlay) overlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('click', (e)=>{
-  if(e.target && e.target.id === 'newsModal') closeNews();
-});
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape') closeNews();
-});
 
 /* Rotating "featured" order — gives a real-time feel without changing content */
 let rotationTick = 0;
@@ -955,12 +905,12 @@ function render(filterCat, searchTerm){
 
 function renderTrending(){
   const list = document.getElementById('trendingList');
-  const top = currentOrder().slice(0,6);
+  const top = currentOrder().slice(0,5);
   list.innerHTML = top.map((n,i)=>`
     <div class="trend-item">
       <div class="trend-num">${i+1}</div>
       <div class="trend-text">
-        <a data-cat="${n.category}">${n.title}</a>
+        <a onclick="window.location.href='article.html?id=${n.id}'">${n.title}</a>
         <div class="t-meta">${n.category} • <span class="rel-time" data-offset="${n.offset}">${relativeTime(n.offset)}</span></div>
       </div>
     </div>`).join("");
@@ -1072,17 +1022,7 @@ setInterval(updateClock, 1000);
 /* 15s — refresh relative "X minute ago" strings across cards */
 setInterval(() => {
   refreshTimestamps();
-  const el = document.getElementById('lastUpdate');
-  if(el) el.textContent = 'अभी-अभी';
 }, 15000);
-
-/* 45s — mark "अंतिम अपडेट" as elapsed */
-setInterval(() => {
-  const el = document.getElementById('lastUpdate');
-  if(!el) return;
-  // count seconds since last "अभी-अभी" tick
-  el.textContent = 'कुछ पल पहले';
-}, 45000);
 
 /* 60s — rotate featured order to keep page feeling live */
 setInterval(() => {
@@ -1093,3 +1033,4 @@ setInterval(() => {
 </script>
 </body>
 </html>
+
