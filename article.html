@@ -45,9 +45,9 @@
   .art-bar .mini-brand{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;line-height:1.2;flex:1;}
   .art-bar .mini-brand small{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.4px;}
 
-  /* Hero image */
-  .art-hero{width:100%;max-height:56vh;min-height:220px;overflow:hidden;background:#0b1230;position:relative;}
-  .art-hero img{width:100%;height:100%;max-height:56vh;min-height:220px;object-fit:cover;display:block;}
+  /* Hero image — single unified sizing (no layout gap on mobile) */
+  .art-hero{width:100%;height:min(56vh,520px);min-height:220px;overflow:hidden;background:#0b1230;position:relative;}
+  .art-hero img{width:100%;height:100%;object-fit:cover;display:block;}
   .art-hero .cat-tag{
     position:absolute;top:14px;left:14px;background:var(--red);color:#fff;font-size:12.5px;font-weight:700;
     padding:5px 14px;border-radius:999px;font-family:'Inter',sans-serif;letter-spacing:.4px;z-index:2;
@@ -57,7 +57,7 @@
   .art-body{padding:24px 0 48px;background:var(--paper);}
   .art-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px 26px 34px;box-shadow:0 6px 24px rgba(20,30,60,.06);margin-top:-24px;position:relative;z-index:3;}
   .art-card h1{font-size:26px;line-height:1.4;color:var(--blue-deep);margin-bottom:12px;}
-  .art-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line);}
+  .art-meta{display:flex;gap:10px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line);line-height:1.5;}
   .art-meta .dot{width:4px;height:4px;background:#c8c8c8;border-radius:50%;align-self:center;}
   .art-content p{font-size:17px;line-height:1.9;color:#26292f;margin-bottom:16px;}
 
@@ -86,18 +86,53 @@
 
   @media (max-width:480px){
     .wrap{padding:0 14px;}
-    .art-hero{min-height:200px;}
-    .art-hero img{min-height:200px;}
+    .art-hero{height:250px;min-height:0;}
+    .art-hero img{height:100%;}
     .art-card{padding:18px 16px 26px;border-radius:12px;}
     .art-card h1{font-size:21px;}
+    .art-meta{font-size:11px;gap:7px;}
     .art-content p{font-size:16px;line-height:1.85;}
     .more-grid{grid-template-columns:1fr;}
   }
 
   .bottom-bar{border-top:1px solid var(--line);padding:18px 14px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);text-align:center;background:var(--white);}
+
+  /* Reading progress bar */
+  .progress-bar{position:fixed;top:0;left:0;height:4px;background:var(--red);z-index:60;width:0%;transition:width .1s linear;box-shadow:0 0 8px rgba(227,6,19,.5);}
+
+  /* Category chips */
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;}
+  .chip{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer;transition:all .2s ease;}
+  .chip.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .chip:hover{background:var(--paper-dim);}
+  .chip.active:hover{background:var(--blue-deep);}
+
+  /* Drop cap — first paragraph */
+  .art-content .dropcap::first-letter{font-family:'Baloo 2',sans-serif;font-size:56px;line-height:.85;float:left;padding:4px 10px 0 0;color:var(--red);font-weight:800;}
+
+  /* Back to top */
+  .back-top{position:fixed;right:16px;bottom:20px;width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 6px 18px rgba(18,43,126,.35);z-index:55;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .25s ease,transform .25s ease,background .2s ease;}
+  .back-top.show{opacity:1;pointer-events:auto;transform:none;}
+  .back-top:hover{background:var(--red);}
+
+  /* Not found state */
+  .notfound{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:48px 26px;text-align:center;margin-top:-24px;position:relative;z-index:3;}
+  .notfound .nf-icon{font-size:52px;margin-bottom:10px;}
+  .notfound h2{font-size:24px;color:var(--blue-deep);margin-bottom:8px;font-family:'Baloo 2',sans-serif;}
+  .notfound p{color:var(--muted);font-size:15px;margin-bottom:22px;}
+  .nf-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 26px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s ease;}
+  .nf-btn:hover{background:var(--red);}
+
+  /* Share buttons */
+  .share-copy{background:var(--gold);}
+  .share-native{background:var(--blue);}
+  .copied-msg{font-size:12.5px;color:#1a9e4b;font-weight:700;}
 </style>
 </head>
 <body>
+
+<!-- Reading progress bar -->
+<div class="progress-bar" id="progressBar"></div>
 
 <!-- Top bar -->
 <div class="art-bar">
@@ -114,7 +149,7 @@
 </div>
 
 <!-- Article -->
-<div class="art-body">
+<div class="art-body" id="artBody">
   <div class="wrap">
     <div class="art-card">
       <h1 id="artTitle"></h1>
@@ -123,6 +158,8 @@
         <span class="dot"></span>
         <span id="artDate"></span>
         <span class="dot"></span>
+        <span id="artRead"></span>
+        <span class="dot"></span>
         <span>✍ ख़बरें इंडिया डेस्क</span>
       </div>
       <div class="art-content" id="artContent"></div>
@@ -130,16 +167,34 @@
       <div class="share-row">
         <span>शेयर करें:</span>
         <a class="share-btn share-wa" id="shareWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="share-btn share-other" id="shareOther" href="#" target="_blank" rel="noopener">अन्य ऐप्स</a>
+        <a class="share-btn share-native" id="shareNative" href="#">अन्य ऐप्स</a>
+        <a class="share-btn share-copy" id="shareCopy" href="#">लिंक कॉपी करें</a>
+        <span class="copied-msg" id="copiedMsg"></span>
       </div>
     </div>
 
     <div class="more-news">
       <h3>और ख़बरें</h3>
+      <div class="chips" id="moreChips"></div>
       <div class="more-grid" id="moreGrid"></div>
     </div>
   </div>
 </div>
+
+<!-- Not found state (invalid ?id=) -->
+<div class="art-body" id="notFoundWrap" style="display:none;">
+  <div class="wrap">
+    <div class="notfound">
+      <div class="nf-icon">📰</div>
+      <h2>खबर नहीं मिली</h2>
+      <p>आपके द्वारा चुनी गई खबर मौजूद नहीं है या हटा दी गई है।</p>
+      <a class="nf-btn" href="index.html">← होम जाएँ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" aria-label="ऊपर जाएँ">↑</button>
 
 <div class="bottom-bar">© <span id="yearNow"></span> Khabre India News — सर्वाधिकार सुरक्षित।</div>
 
@@ -166,38 +221,125 @@ function absoluteTime(offsetMinutes){
   return `${d.getDate()} ${HI_MONTHS[d.getMonth()]} ${d.getFullYear()} • ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function thumbOf(url){ return (url||'').replace('w=1200&q=70','w=400&q=60'); }
+function readingMinutes(item){
+  const words = (item.title + ' ' + item.summary + ' ' + item.body).split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
-/* ===== get id from URL ===== */
+/* ===== get id from URL — proper not-found handling ===== */
 const params = new URLSearchParams(window.location.search);
-const id = parseInt(params.get('id'), 10);
-const item = newsData.find(n => n.id === id) || newsData[0];
-const idx = newsData.findIndex(n => n.id === item.id);
+const rawId = params.get('id');
+const id = parseInt(rawId, 10);
+const item = newsData.find(n => n.id === id);
+const valid = !!(item && !isNaN(id));
 
-/* ===== fill article ===== */
-document.title = item.title + " | ख़बरें इंडिया न्यूज़";
-document.getElementById('artHeroImg').src = item.img;
-document.getElementById('artHeroImg').alt = item.title;
-document.getElementById('artCat').textContent = item.category;
-document.getElementById('artTitle').textContent = item.title;
-document.getElementById('artTime').textContent = "🕒 " + relativeTime(item.offset);
-document.getElementById('artDate').textContent = "📅 " + absoluteTime(item.offset);
-document.getElementById('artContent').innerHTML = `<p>${item.summary}</p><p>${item.body}</p>`;
+const artHero = document.getElementById('artHero');
+const artBody = document.getElementById('artBody');
+const notFoundWrap = document.getElementById('notFoundWrap');
 
-/* ===== share ===== */
-const shareURL = encodeURIComponent(window.location.href);
-const shareText = encodeURIComponent(item.title);
-document.getElementById('shareWa').href = `https://wa.me/?text=${shareText}%20${shareURL}`;
-document.getElementById('shareOther').href = `https://api.whatsapp.com/send?text=${shareText}%20${shareURL}`;
+if(!valid){
+  /* खबर नहीं मिली — no silent fallback to article #1 */
+  artHero.style.display = 'none';
+  artBody.style.display = 'none';
+  notFoundWrap.style.display = 'block';
+} else {
+  /* ===== fill article ===== */
+  document.title = item.title + " | ख़बरें इंडिया न्यूज़";
+  document.getElementById('artHeroImg').src = item.img;
+  document.getElementById('artHeroImg').alt = item.title;
+  document.getElementById('artCat').textContent = item.category;
+  document.getElementById('artTitle').textContent = item.title;
+  document.getElementById('artTime').textContent = "🕒 " + relativeTime(item.offset);
+  document.getElementById('artDate').textContent = "📅 " + absoluteTime(item.offset);
+  document.getElementById('artRead').textContent = "📖 " + readingMinutes(item) + " मिनट पढ़ें";
+  document.getElementById('artContent').innerHTML = `<p class="dropcap">${item.summary}</p><p>${item.body}</p>`;
 
-/* ===== more news ===== */
-const others = newsData.filter(n => n.id !== item.id).slice(0,4);
-document.getElementById('moreGrid').innerHTML = others.map(n => `
-  <a class="mini-card" href="article.html?id=${n.id}">
-    <div class="m-thumb"><img src="${thumbOf(n.img)}" alt="${n.title}" loading="lazy"></div>
-    <div class="m-body"><h4>${n.title}</h4></div>
-  </a>`).join("");
+  /* ===== share — native share + WhatsApp + copy link ===== */
+  const shareURL = encodeURIComponent(window.location.href);
+  const shareText = encodeURIComponent(item.title);
+  document.getElementById('shareWa').href = `https://wa.me/?text=${shareText}%20${shareURL}`;
+
+  document.getElementById('shareNative').addEventListener('click', function(e){
+    e.preventDefault();
+    if(navigator.share){
+      navigator.share({ title:item.title, text:item.title, url:window.location.href }).catch(function(){});
+      return;
+    }
+    /* Fallback for browsers without Web Share API */
+    const fb = `https://www.facebook.com/sharer/sharer.php?u=${shareURL}`;
+    const tw = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareURL}`;
+    const tg = `https://t.me/share/url?url=${shareURL}&text=${shareText}`;
+    const choice = window.prompt("शेयर करने के लिए चुनें:\n1 = Facebook\n2 = X (Twitter)\n3 = Telegram");
+    if(choice === '1') window.open(fb, '_blank');
+    else if(choice === '2') window.open(tw, '_blank');
+    else if(choice === '3') window.open(tg, '_blank');
+  });
+
+  const copiedMsg = document.getElementById('copiedMsg');
+  function showCopied(){
+    copiedMsg.textContent = '✓ लिंक कॉपी हो गया';
+    setTimeout(function(){ copiedMsg.textContent = ''; }, 2200);
+  }
+  document.getElementById('shareCopy').addEventListener('click', function(e){
+    e.preventDefault();
+    function copyFallback(){
+      const ta = document.createElement('textarea');
+      ta.value = window.location.href;
+      ta.setAttribute('readonly','');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try{ document.execCommand('copy'); showCopied(); }
+      catch(err){ window.prompt('लिंक कॉपी करें:', window.location.href); }
+      document.body.removeChild(ta);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(window.location.href).then(showCopied).catch(copyFallback);
+    } else { copyFallback(); }
+  });
+
+  /* ===== more news + category filter chips ===== */
+  const related = newsData.filter(n => n.id !== item.id).slice(0, 10);
+  const chipsWrap = document.getElementById('moreChips');
+  const grid = document.getElementById('moreGrid');
+
+  function renderRelated(filter){
+    const list = filter === 'all' ? related : related.filter(n => n.category === filter);
+    grid.innerHTML = list.length
+      ? list.map(n => `
+          <a class="mini-card" href="article.html?id=${n.id}">
+            <div class="m-thumb"><img src="${thumbOf(n.img)}" alt="${n.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1B3FAE,#3B5FE0)';"></div>
+            <div class="m-body"><h4>${n.title}</h4></div>
+          </a>`).join("")
+      : '<p style="color:var(--muted);font-size:14px;padding:10px 0;">इस श्रेणी में कोई और खबर नहीं मिली।</p>';
+  }
+
+  const cats = ['all', ...new Set(newsData.map(n => n.category))];
+  chipsWrap.innerHTML = cats.map(c => `<button class="chip ${c==='all'?'active':''}" data-cat="${c}">${c==='all'?'सभी':c}</button>`).join("");
+  chipsWrap.addEventListener('click', function(e){
+    const btn = e.target.closest('.chip');
+    if(!btn) return;
+    chipsWrap.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+    renderRelated(btn.getAttribute('data-cat'));
+  });
+  renderRelated('all');
+
+  /* ===== reading-progress bar + back-to-top ===== */
+  const progressBar = document.getElementById('progressBar');
+  const backTop = document.getElementById('backTop');
+  function onScroll(){
+    const st = window.scrollY || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
+    backTop.classList.toggle('show', st > 400);
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+  backTop.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+}
 </script>
 </body>
 </html>
