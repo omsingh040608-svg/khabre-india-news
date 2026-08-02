@@ -47,6 +47,26 @@
   .reveal.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
 
+  /* Top date & time strip — always visible at the very top on phone */
+  .top-strip{
+    background:var(--blue-deep);
+    color:#fff;
+    padding:9px 0;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+    letter-spacing:.3px;
+    border-bottom:2px solid var(--red);
+  }
+  .top-strip .wrap{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .top-strip span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .top-strip .ts-sep{opacity:.45;}
+  @media (max-width:480px){
+    .top-strip{font-size:12px;padding:8px 0;}
+    .top-strip .wrap{gap:10px;}
+  }
+
   /* Masthead */
   .masthead{background:var(--white);border-bottom:1px solid var(--line);position:relative;}
   .masthead-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;flex-wrap:wrap;}
@@ -104,14 +124,6 @@
   .ticker-track span{opacity:.95;}
   .ticker:hover .ticker-track{animation-play-state:paused;}
   @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-  /* Date & time — small single line above search bar */
-  .dt-line{
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--muted);
-    margin:0 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;
-  }
-  .dt-line .dt-sep{color:var(--red);font-weight:800;}
 
   /* Nav */
   .nav-bar{background:var(--blue);position:sticky;top:0;z-index:40;box-shadow:0 2px 12px rgba(18,43,126,.18);}
@@ -198,17 +210,10 @@
   .vf-title{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;line-height:1.4;}
   .vf-sub{font-size:11.5px;color:#cfd0d5;line-height:1.4;}
 
-  .side-social{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .follow-btn{
-    display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 10px;border-radius:999px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#fff;
-    box-shadow:0 3px 8px rgba(0,0,0,.14);cursor:pointer;position:relative;overflow:hidden;
-    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease;min-width:0;
-  }
-  .follow-btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.22);}
-  .follow-btn .fic{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .follow-btn .fic svg{width:16px;height:16px;}
-  .follow-btn .f-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;}
+  /* Sidebar follow — saare 8 circular icons, 2-column centered grid (phone par sab ek saath) */
+  .side-social{display:grid;grid-template-columns:repeat(2,auto);gap:14px 18px;justify-content:center;align-items:center;padding:8px 0;}
+  .side-social .social-ic{width:46px;height:46px;}
+  .side-social .social-ic svg{width:21px;height:21px;}
 
   /* Editor / footer */
   footer{background:var(--blue-deep);color:#dfe4f5;margin-top:40px;position:relative;}
@@ -233,54 +238,12 @@
   .editor-card p{font-size:14.5px;line-height:1.8;color:#dfe4f5;margin-bottom:10px;max-width:74ch;}
   .editor-card .quote{border-left:3px solid var(--gold);padding-left:14px;font-style:italic;color:#fff;}
 
-  /* Footer links (BBC-style accordion) */
+  /* Footer links — naye pages */
   .fl-section{border-top:1px solid rgba(255,255,255,.14);}
   .fl-section .wrap{padding:8px 20px;}
-  .fl-links{display:flex;flex-wrap:wrap;gap:4px 0;justify-content:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14);}
-  .fl-links a{font-family:'Inter',sans-serif;font-size:13px;color:#c3cae3;padding:4px 14px;cursor:pointer;transition:color .2s ease,text-decoration .2s ease;}
+  .fl-links{display:flex;flex-wrap:wrap;gap:6px 0;justify-content:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);}
+  .fl-links a{font-family:'Inter',sans-serif;font-size:13px;color:#c3cae3;padding:5px 14px;cursor:pointer;transition:color .2s ease,text-decoration .2s ease;}
   .fl-links a:hover{color:#fff;text-decoration:underline;}
-  .fl-item{border-bottom:1px solid rgba(255,255,255,.12);}
-  .fl-item:last-child{border-bottom:none;}
-  .fl-head{
-    width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
-    padding:13px 6px;background:none;border:none;cursor:pointer;color:#fff;text-align:left;
-    font-family:'Baloo 2',sans-serif;font-size:15.5px;font-weight:600;transition:color .2s ease;
-  }
-  .fl-head:hover{color:var(--gold);}
-  .fl-head .arrow{font-family:'Inter',sans-serif;font-size:13px;color:var(--gold);transition:transform .3s ease;flex-shrink:0;}
-  .fl-item.open .fl-head .arrow{transform:rotate(180deg);}
-  .fl-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.7,.2,1);}
-  .fl-inner{padding:2px 6px 20px;color:#c3cae3;font-size:14px;line-height:1.85;}
-  .fl-inner h4{color:#fff;font-family:'Baloo 2',sans-serif;font-size:16px;margin-bottom:8px;}
-  .fl-inner p{margin-bottom:10px;}
-  .fl-inner b{color:#fff;}
-  .fl-inner ul{list-style:none;padding:0;}
-  .fl-inner ul li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.14);font-size:14px;color:#c3cae3;}
-  .fl-inner ul li:last-child{border-bottom:none;}
-  .fl-inner ul li b{color:#fff;}
-  .fl-inner ul li .chk{color:var(--gold);font-weight:800;flex-shrink:0;}
-  .fl-inner .hashtag{font-family:'Inter',sans-serif;font-size:13px;color:var(--gold);font-weight:700;margin-top:6px;}
-  .fl-inner .contact-line{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;font-size:14px;color:#c3cae3;}
-  .fl-inner .contact-line a{color:#fff;text-decoration:underline;}
-  .fl-inner .contact-line a:hover{color:var(--gold);}
-  .fl-team{margin-top:16px;border-top:1px dashed rgba(255,255,255,.2);padding-top:16px;}
-  .fl-team h4{color:var(--gold);font-family:'Baloo 2',sans-serif;font-size:17px;margin-bottom:12px;}
-  .fl-team-card{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;}
-  @media (max-width:480px){.fl-team-card{grid-template-columns:1fr;text-align:center;justify-items:center;}}
-  .fl-team-avatar{
-    width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#E3B94A);color:var(--blue-deep);
-    display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',sans-serif;font-size:30px;font-weight:800;
-    flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,.3);overflow:hidden;position:relative;
-  }
-  .fl-team-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
-  .fl-team-card h5{color:#fff;font-size:18px;margin-bottom:2px;}
-  .fl-team-card .role{color:var(--gold);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.3px;margin-bottom:10px;}
-  .fl-team-card p{font-size:13.5px;line-height:1.75;color:#c3cae3;margin-bottom:8px;}
-  .fl-team-quote{
-    grid-column:1/-1;border-left:3px solid var(--gold);background:rgba(255,255,255,.05);
-    padding:12px 16px;border-radius:8px;font-style:italic;color:#fff;font-size:14px;line-height:1.75;
-  }
-  .fl-team-quote b{color:var(--gold);}
 
   .footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;padding:34px 0;}
   @media (max-width:800px){.footer-grid{grid-template-columns:1fr;}}
@@ -293,8 +256,8 @@
   .contact-line a[href^="tel:"]{white-space:nowrap;}
   .contact-line a[href^="mailto:"]{word-break:break-all;word-break:break-word;}
   .foot-social{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
-  .foot-social .social-ic{width:40px;height:40px;box-shadow:0 3px 8px rgba(0,0,0,.3);}
-  .foot-social .social-ic svg{width:19px;height:19px;}
+  .foot-social .social-ic{width:32px;height:32px;box-shadow:0 3px 8px rgba(0,0,0,.3);}
+  .foot-social .social-ic svg{width:16px;height:16px;}
   .cat-links a{transition:color .2s ease,padding-left .2s ease;cursor:pointer;}
   .cat-links a:hover{color:#fff;padding-left:4px;}
   .bottom-bar{border-top:1px solid rgba(255,255,255,.14);padding:16px 0;font-family:'Inter',sans-serif;font-size:12.5px;color:#9aa4c7;text-align:center;}
@@ -308,8 +271,9 @@
     .card .thumb .cat-tag{top:6px;left:6px;font-size:9.5px;padding:3px 7px;}
     .card-body{padding:10px 12px;display:flex;flex-direction:column;justify-content:center;}
     .card-body .t-row{gap:8px;margin-bottom:4px;}
-    .card-body h3{font-size:15px;line-height:1.32;}
-    .card.lead .card-body h3{font-size:16px;}
+    /* Phone par headline poori dikhe — no clamping */
+    .card-body h3{font-size:15px;line-height:1.35;display:block;}
+    .card.lead .card-body h3{font-size:15.5px;}
     .card-body p{font-size:13px;margin-bottom:6px;-webkit-line-clamp:2;}
     .mini-time{font-size:10px;padding-top:2px;}
     .meta{font-size:10.5px;gap:7px;}
@@ -335,11 +299,16 @@
     .ticker .wrap{height:38px;}
     .ticker-label{padding:0 11px;font-size:12px;}
     .ticker-track{font-size:13.5px;gap:34px;}
-    .dt-line{font-size:12px;}
     .nav-bar a{padding:12px 13px;font-size:14.5px;}
     .layout{padding:22px 0 6px;gap:26px;}
     .section-title{font-size:18px;margin:28px 0 12px;}
     .card .thumb{width:122px;min-width:122px;height:98px;}
+    .card-body h3{font-size:14px;}
+    .card.lead .card-body h3{font-size:14.5px;}
+    /* Follow icons compact on small phones — 8 icons, 2-column grid, sab ek saath */
+    .side-social{gap:10px 14px;}
+    .side-social .social-ic{width:40px;height:40px;}
+    .side-social .social-ic svg{width:18px;height:18px;}
     .editor-card{gap:18px;}
     .editor-avatar{width:88px;height:88px;}
     .editor-card h4{font-size:19px;}
@@ -357,6 +326,15 @@
 </style>
 </head>
 <body>
+
+<!-- Top date & time strip -->
+<div class="top-strip">
+  <div class="wrap">
+    <span>📅 <span id="topDate">--</span></span>
+    <span class="ts-sep">|</span>
+    <span>🕒 <span id="topClock">--:--:--</span></span>
+  </div>
+</div>
 
 <!-- Masthead -->
 <div class="masthead">
@@ -401,9 +379,6 @@
 <!-- Main -->
 <div class="wrap layout">
   <main>
-    <div class="dt-line">
-      <span id="miniDate">--</span><span class="dt-sep">•</span><span id="miniClock">--:--:--</span>
-    </div>
     <div class="filter-bar">
       <input type="text" id="searchBox" placeholder="ख़बर खोजें...">
     </div>
@@ -463,112 +438,12 @@
   <div class="fl-section">
     <div class="wrap">
       <div class="fl-links">
-        <a class="fl-scroll" data-fl="about">हमारे बारे में</a>
-        <a class="fl-scroll" data-fl="contact">संपर्क करें</a>
-        <a class="fl-scroll" data-fl="privacy">गोपनीयता नीति</a>
-        <a class="fl-scroll" data-fl="terms">उपयोग की शर्तें</a>
-        <a class="fl-scroll" data-fl="cookies">कुकीज़</a>
-        <a class="fl-scroll" data-fl="donotshare">Do Not Share or Sell My Info</a>
-      </div>
-
-      <div class="fl-item" id="fl-about">
-        <button class="fl-head" onclick="toggleFL('fl-about')">हमारे बारे में<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>"आवाज़ आपकी, मेहनत हमारी"</h4>
-          <p>हम निभाते हैं मीडिया होने का कर्तव्य — जनता से, जनता की ओर, जनता के लिए। <b>Khabre INDIA</b> – आवाज़ जन-गण-मन की।</p>
-          <p>यहाँ आपको मिलेंगी देश-दुनिया की ताज़ा और विश्वसनीय खबरें, राजनीति की हर बड़ी हलचल, मनोरंजन जगत की खास अपडेट्स, खेल जगत की प्रमुख खबरें, सोशल मीडिया पर वायरल खबरों का सच, फिल्म रिव्यू, समसामयिक और जनहित के महत्वपूर्ण मुद्दों पर विशेष चर्चा, एक्सक्लूसिव इंटरव्यू, ग्राउंड रिपोर्ट्स और बहुत कुछ।</p>
-          <p>हमारा उद्देश्य है आपको तेज़, निष्पक्ष, विश्वसनीय और तथ्यात्मक समाचार उपलब्ध कराना, ताकि आप हर महत्वपूर्ण खबर से सबसे पहले और सही जानकारी के साथ जुड़े रहें।</p>
-          <ul>
-            <li><span class="chk">✓</span><span><b>ताज़ा और विश्वसनीय खबरें</b> — देश-दुनिया की हर बड़ी हलचल एक ही जगह।</span></li>
-            <li><span class="chk">✓</span><span><b>राजनीति से लेकर मनोरंजन तक</b> — हर विषय की खास अपडेट्स।</span></li>
-            <li><span class="chk">✓</span><span><b>वायरल खबरों का सच</b> — सोशल मीडिया की हर अफ़वाह की पड़ताल।</span></li>
-            <li><span class="chk">✓</span><span><b>एक्सक्लूसिव इंटरव्यू व ग्राउंड रिपोर्ट्स</b> — सच को सामने लाने का संकल्प।</span></li>
-            <li><span class="chk">✓</span><span><b>निष्पक्ष, तेज़ और तथ्यात्मक पत्रकारिता</b> — जनता की आवाज़ बनने का दायित्व।</span></li>
-          </ul>
-          <div class="hashtag">#Khabre_INDIA — आवाज़ जन-गण-मन की।</div>
-
-          <div class="fl-team">
-            <h4>हमारी टीम</h4>
-            <div class="fl-team-card">
-              <div class="fl-team-avatar"><img src="anupam-parihar.jpg" alt="अनुपम परिहार — संपादक" onerror="this.style.display='none';this.textContent='AP';"><span>AP</span></div>
-              <div>
-                <h5>अनुपम परिहार</h5>
-                <div class="role">संपादक (Editor) — ख़बरें इंडिया न्यूज़</div>
-                <p>अनुपम परिहार भारतीय पत्रकारिता जगत में एक भरोसेमंद और सम्मानित नाम हैं। ज़मीनी रिपोर्टिंग से अपने करियर की शुरुआत करने वाले अनुपम ने निष्पक्ष, तथ्यपरक और साहसिक पत्रकारिता को हमेशा अपना मूल सिद्धांत बनाया।</p>
-                <p>लखनऊ स्थित मुख्यालय से संचालित यह न्यूज़ प्लेटफ़ॉर्म उनके नेतृत्व में भारत, राजनीति, समाज, खेल, बिजनेस और मनोरंजन जैसे विषयों पर गहराई और संवेदनशीलता के साथ रिपोर्टिंग करता है।</p>
-              </div>
-            </div>
-          </div>
-        </div></div>
-      </div>
-
-      <div class="fl-item" id="fl-contact">
-        <button class="fl-head" onclick="toggleFL('fl-contact')">संपर्क करें<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>हमसे जुड़ें</h4>
-          <div class="contact-line">📍 <span>A1, वज़ीर हसन रोड, लखनऊ</span></div>
-          <div class="contact-line">☎ <span>ऑफिस नं.: <a href="tel:9651328100">9651328100</a></span></div>
-          <div class="contact-line">📞 <span>संपादक: <a href="tel:+918305117578">+91 83051 17578</a></span></div>
-          <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918318880819" href="https://wa.me/918318880819" target="_blank" rel="noopener">+91 83188 80819</a></span></div>
-          <div class="contact-line">💬 <span>WhatsApp: <a class="social-link" data-app="whatsapp://send?phone=918305117578" href="https://wa.me/918305117578" target="_blank" rel="noopener">+91 83051 17578</a></span></div>
-          <div class="contact-line">✉ <span><a href="mailto:anupam03singh1998@gmail.com">anupam03singh1998@gmail.com</a></span></div>
-          <div class="contact-line">✉ <span><a href="mailto:Indianewskhabre@gmail.com">Indianewskhabre@gmail.com</a></span></div>
-        </div></div>
-      </div>
-
-      <div class="fl-item" id="fl-privacy">
-        <button class="fl-head" onclick="toggleFL('fl-privacy')">गोपनीयता नीति<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>आपकी जानकारी की सुरक्षा</h4>
-          <p><b>Khabre INDIA</b> आपकी निजता का पूरा सम्मान करता है। हम आपकी व्यक्तिगत जानकारी को सुरक्षित रखने के लिए प्रतिबद्ध हैं।</p>
-          <ul>
-            <li><span class="chk">✓</span><span>हम आपकी निजी जानकारी (नाम, ईमेल, फ़ोन) बिना सहमति के किसी तीसरे पक्ष के साथ साझा नहीं करते।</span></li>
-            <li><span class="chk">✓</span><span>वेबसाइट विज़िट के दौरान एकत्रित डेटा केवल आपके अनुभव को बेहतर बनाने के लिए उपयोग होता है।</span></li>
-            <li><span class="chk">✓</span><span>हमारी वेबसाइट पर विज्ञापन/एनालिटिक्स साझेदार कुकीज़ का उपयोग कर सकते हैं।</span></li>
-            <li><span class="chk">✓</span><span>किसी भी जानकारी के उपयोग या साझा करने से पहले आपकी स्पष्ट अनुमति ली जाएगी।</span></li>
-          </ul>
-        </div></div>
-      </div>
-
-      <div class="fl-item" id="fl-terms">
-        <button class="fl-head" onclick="toggleFL('fl-terms')">उपयोग की शर्तें<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>उपयोग की शर्तें</h4>
-          <p><b>Khabre INDIA</b> वेबसाइट का उपयोग करके आप निम्नलिखित शर्तों से सहमत होते हैं:</p>
-          <ul>
-            <li><span class="chk">✓</span><span>वेबसाइट पर प्रकाशित सभी समाचार, लेख और सामग्री केवल सूचनात्मक उद्देश्य के लिए हैं।</span></li>
-            <li><span class="chk">✓</span><span>बिना अनुमति के हमारी सामग्री को पुनः प्रकाशित या पुनः वितरित नहीं किया जा सकता।</span></li>
-            <li><span class="chk">✓</span><span>वेबसाइट का उपयोग किसी भी अवैध या अनुचित गतिविधि के लिए नहीं किया जा सकता।</span></li>
-            <li><span class="chk">✓</span><span>हम सटीकता सुनिश्चित करते हैं, परंतु किसी भी बाहरी स्रोत से मिली जानकारी की पुष्टि हेतु हम ज़िम्मेदार नहीं हैं।</span></li>
-          </ul>
-        </div></div>
-      </div>
-
-      <div class="fl-item" id="fl-cookies">
-        <button class="fl-head" onclick="toggleFL('fl-cookies')">कुकीज़<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>कुकीज़ क्या हैं?</h4>
-          <p>कुकीज़ छोटी फ़ाइलें होती हैं जो आपके डिवाइस पर सहेजी जाती हैं। हम और हमारे साथी वेबसाइट के प्रदर्शन, आपकी पसंद और विज्ञापनों को अनुकूलित करने के लिए कुकीज़ का उपयोग करते हैं।</p>
-          <ul>
-            <li><span class="chk">✓</span><span><b>ज़रूरी कुकीज़</b> — वेबसाइट के बुनियादी कार्यों के लिए आवश्यक।</span></li>
-            <li><span class="chk">✓</span><span><b>एनालिटिक्स कुकीज़</b> — यह समझने के लिए कि आगंतुक वेबसाइट का उपयोग कैसे करते हैं।</span></li>
-            <li><span class="chk">✓</span><span><b>विज्ञापन कुकीज़</b> — आपकी रुचि के अनुसार विज्ञापन दिखाने के लिए।</span></li>
-            <li><span class="chk">✓</span><span>आप अपनी ब्राउज़र सेटिंग्स से कुकीज़ को बंद या हटा सकते हैं।</span></li>
-          </ul>
-        </div></div>
-      </div>
-
-      <div class="fl-item" id="fl-donotshare">
-        <button class="fl-head" onclick="toggleFL('fl-donotshare')">Do Not Share or Sell My Info<span class="arrow">▼</span></button>
-        <div class="fl-body"><div class="fl-inner">
-          <h4>अपनी जानकारी साझा/बेचे न जाने का अधिकार</h4>
-          <p>आपके पास यह अधिकार है कि आपकी व्यक्तिगत जानकारी किसी तीसरे पक्ष के साथ साझा या बेची न जाए। हम आपकी व्यक्तिगत जानकारी बेचते नहीं हैं।</p>
-          <ul>
-            <li><span class="chk">✓</span><span>आप किसी भी समय अपनी जानकारी साझा/बेचे जाने से मना कर सकते हैं।</span></li>
-            <li><span class="chk">✓</span><span>अनुरोध करने के लिए हमें ईमेल करें: <a href="mailto:anupam03singh1998@gmail.com">anupam03singh1998@gmail.com</a></span></li>
-            <li><span class="chk">✓</span><span>अनुरोध मिलने के 30 दिनों के भीतर हम कार्रवाई करेंगे।</span></li>
-          </ul>
-        </div></div>
+        <a href="about.html">हमारे बारे में</a>
+        <a href="contact.html">संपर्क करें</a>
+        <a href="privacy.html">गोपनीयता नीति</a>
+        <a href="terms.html">उपयोग की शर्तें</a>
+        <a href="cookies.html">कुकीज़</a>
+        <a href="donotshare.html">Do Not Share or Sell My Info</a>
       </div>
 
     </div>
@@ -635,7 +510,8 @@ const SOCIALS = [
 
 /* Header shows only main platform icons — WhatsApp & Email stay in footer only */
 const HEADER_SOCIALS = SOCIALS.filter(s => s.key !== 'wa' && s.key !== 'em');
-/* Sidebar "हमें फॉलो करें" — WhatsApp & Email removed */
+/* Sidebar "हमें फॉलो करें" — sirf 4 icons (YouTube, Instagram, Facebook, X)
+   WhatsApp & Email footer mein hi rehte hain. 2-column grid mein sab ek saath. */
 const FOLLOW_SOCIALS = SOCIALS.filter(s => s.key !== 'wa' && s.key !== 'em');
 
 function isMobileDevice(){
@@ -668,14 +544,11 @@ function iconBtn(s){
   return `<a class="social-ic social-link ${s.cls}" ${s.app?`data-app="${s.app}"`:''} href="${s.web}" ${s.web.startsWith('mailto:')?'':'target="_blank" rel="noopener"'} aria-label="${s.label}">
     ${SVG[s.key]}<span class="tip">${s.label}</span></a>`;
 }
-function followBtn(s){
-  return `<a class="follow-btn social-link ${s.cls}" ${s.app?`data-app="${s.app}"`:''} href="${s.web}" ${s.web.startsWith('mailto:')?'':'target="_blank" rel="noopener"'} title="${s.follow}">
-    <span class="fic">${SVG[s.key]}</span><span class="f-label">${s.label}</span></a>`;
-}
+
 function renderSocials(){
   document.getElementById('headerSocial').innerHTML = HEADER_SOCIALS.map(iconBtn).join('');
   document.getElementById('footerSocial').innerHTML = SOCIALS.map(iconBtn).join('');
-  document.getElementById('followList').innerHTML = FOLLOW_SOCIALS.map(followBtn).join('');
+  document.getElementById('followList').innerHTML = FOLLOW_SOCIALS.map(iconBtn).join('');
   bindSmartLinks(document);
 }
 
@@ -702,7 +575,13 @@ const IMG = {
   startup:     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=70',
   heritage:    'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=70',
   movie:       'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=70',
-  health:      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=70'
+  health:      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=70',
+  cricket2:    'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1200&q=70',
+  gold:        'https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1200&q=70',
+  growth:      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=70',
+  digital:     'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=70',
+  cinema:      'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=70',
+  rocket:      'https://images.unsplash.com/photo-1457364887197-9150188c107b?auto=format&fit=crop&w=1200&q=70'
 };
 
 /* Small/light version of the same image for homepage cards (fast load on phone) */
@@ -830,7 +709,43 @@ const newsData = [
     title:"देश में बना नया सुपरकंप्यूटर, शोध और आपदा प्रबंधन में लाएगा बड़ा बदलाव",
     summary:"स्वदेशी तकनीक से बने इस सुपरकंप्यूटर की गति दुनिया के सबसे तेज़ कंप्यूटरों में शामिल है।",
     body:"वैज्ञानिकों ने बताया कि यह सुपरकंप्यूटर जलवायु मॉडलिंग, मौसम पूर्वानुमान, दवा खोज और आपदा प्रबंधन जैसे क्षेत्रों में अहम भूमिका निभाएगा। इसे पूरी तरह देश में ही डिज़ाइन और असेंबल किया गया है।",
-    img: IMG.health }
+    img: IMG.health },
+
+  { id:21, offset:28500, category:"खेल",
+    title:"आईपीएल मेगा ऑक्शन से पहले सनसनीखेज़ तैयारियाँ, दिग्गज खिलाड़ियों पर रहेगी नज़र",
+    summary:"आईपीएल 2026 की नीलामी में 500 से ज़्यादा खिलाड़ी शामिल होंगे। युवा तेज़ गेंदबाज़ों और ऑलराउंडरों पर टीमों की नज़र।",
+    body:"आईपीएल 2026 की मेगा नीलामी की तारीख़ों का ऐलान कर दिया गया है। इस बार नीलामी में देश-विदेश के 500 से ज़्यादा खिलाड़ी शामिल होंगे। सभी फ्रेंचाइज़ियों ने अपनी रणनीति तय कर ली है और युवा प्रतिभाओं पर दांव लगाने की तैयारी है। अनुभवी कप्तानों और आईसीसी इवेंट्स में शानदार प्रदर्शन करने वाले खिलाड़ियों पर सबसे ज़्यादा बोली लगने की उम्मीद है। क्रिकेट विशेषज्ञों का मानना है कि इस नीलामी में कई नए चेहरे बड़ी रकम पा सकते हैं और कुछ पुराने दिग्गजों का किस्मत का सितारा फिर चमक सकता है।",
+    img: IMG.cricket2 },
+
+  { id:22, offset:30200, category:"बिजनेस",
+    title:"सोने की कीमतों ने तोड़ा रिकॉर्ड, निवेशकों में ज़बरदस्त उत्साह",
+    summary:"वैश्विक अनिश्चितताओं के बीच सोना फिर सुरक्षित निवेश साबित हुआ। आभूषण खरीदारी में भी तेज़ी।",
+    body:"अंतरराष्ट्रीय बाज़ार में सोने की कीमतों में लगातार तेज़ी जारी है और आज इसने नया ऐतिहासिक शिखर छू लिया। कमज़ोर डॉलर और भू-राजनीतिक अनिश्चितताओं के कारण निवेशक सोने की ओर रुख़ कर रहे हैं। भारतीय बाज़ार में भी सोने के दाम रिकॉर्ड स्तर पर पहुँच गए हैं। हालाँकि, शादी के सीज़न के चलते आभूषण खरीदारी पर इसका ज़्यादा असर नहीं पड़ा है। ज्वैलर्स का कहना है कि ग्राहकों की संख्या में लगातार बढ़ोतरी देखने को मिल रही है। विश्लेषकों के अनुसार आने वाले दिनों में भी सोने में तेज़ी बनी रह सकती है।",
+    img: IMG.gold },
+
+  { id:23, offset:31800, category:"भारत",
+    title:"देश की GDP ग्रोथ अनुमान से बेहतर, अर्थव्यवस्था को मिला नया सहारा",
+    summary:"मज़बूत सेवा क्षेत्र और बेहतर खपत के दम पर अर्थव्यवस्था ने तीसरी तिमाही में शानदार प्रदर्शन किया।",
+    body:"सरकार की ओर से जारी आधिकारिक आँकड़ों के अनुसार चालू वित्त वर्ष की तीसरी तिमाही में GDP ग्रोथ दर अनुमान से बेहतर रही। सेवा क्षेत्र, निर्माण और निजी खपत ने विकास दर को गति दी है। विशेषज्ञों का कहना है कि बेहतर मानसून और सरकारी पूँजीगत खर्च ने भी अर्थव्यवस्था को सहारा दिया है। वैश्विक स्तर पर मंदी की आशंकाओं के बावजूद भारतीय अर्थव्यवस्था ने मज़बूती दिखाई है। मुख्य आर्थिक सलाहकार ने कहा कि आने वाली तिमाहियों में भी विकास की रफ़्तार बनी रहेगी और अगले वित्त वर्ष में GDP 7 प्रतिशत के पार जा सकती है।",
+    img: IMG.growth },
+
+  { id:24, offset:33500, category:"तकनीक",
+    title:"UPI से डिजिटल भुगतान में नया रिकॉर्ड, दिसंबर में हुए 10 अरब से ज़्यादा लेन-देन",
+    summary:"देश में डिजिटल भुगतान की रफ़्तार लगातार बढ़ रही है। छोटे कारोबारियों तक UPI की पहुँच बढ़ी।",
+    body:"नेशनल पेमेंट्स कॉर्पोरेशन ऑफ़ इंडिया द्वारा जारी आँकड़ों के अनुसार UPI से हुए कुल लेन-देन ने नया रिकॉर्ड बनाया है। दिसंबर महीने में पहली बार 10 अरब से ज़्यादा UPI लेन-देन दर्ज किए गए। रोज़मर्रा की खरीदारी से लेकर बड़े भुगतान तक, UPI अब देश की रीढ़ बन चुका है। छोटे दुकानदारों और स्ट्रीट वेंडर्स तक QR कोड भुगतान की पहुँच बढ़ने से डिजिटल इंडिया का सपना साकार होता दिख रहा है। विशेषज्ञों का कहना है कि आने वाले सालों में UPI के ज़रिये होने वाले लेन-देन और भी बढ़ेंगे।",
+    img: IMG.digital },
+
+  { id:25, offset:35200, category:"मनोरंजन",
+    title:"सुपरस्टार की बहुप्रतीक्षित फ़िल्म का नया पोस्टर रिलीज़, फैंस में ज़बरदस्त उत्साह",
+    summary:"फ़िल्म के टीज़र को अब तक करोड़ों व्यूज़ मिल चुके हैं। रिलीज़ डेट का ऐलान जल्द होगा।",
+    body:"सुपरस्टार की बहुप्रतीक्षित फ़िल्म का नया पोस्टर रिलीज़ होते ही सोशल मीडिया पर तहलका मच गया है। पोस्टर में सुपरस्टार के नए लुक ने फैंस का दिल जीत लिया है। फ़िल्म के टीज़र को अब तक करोड़ों व्यूज़ मिल चुके हैं और हर पोस्ट पर फैंस का प्यार बरस रहा है। निर्माताओं का कहना है कि फ़िल्म की रिलीज़ डेट का ऐलान जल्द किया जाएगा। इस फ़िल्म में सुपरस्टार के साथ कई बड़े कलाकार भी नज़र आएँगे। ट्रेड एक्सपर्ट्स का मानना है कि यह फ़िल्म बॉक्स ऑफ़िस पर कई रिकॉर्ड तोड़ सकती है।",
+    img: IMG.cinema },
+
+  { id:26, offset:37000, category:"दुनिया",
+    title:"अंतरिक्ष में भारत की दमदार छलांग, नए मिशन की तैयारियाँ पूरी",
+    summary:"वैज्ञानिकों ने अगले बड़े अंतरिक्ष मिशन की सभी तकनीकी तैयारियाँ पूरी कर ली हैं।",
+    body:"भारतीय अंतरिक्ष अनुसंधान संगठन ने अपने अगले बड़े मिशन की तैयारियाँ पूरी कर ली हैं। यह मिशन अंतरिक्ष में भारत की बढ़ती ताकत का प्रतीक माना जा रहा है। वैज्ञानिकों ने सभी तकनीकी परीक्षण सफलतापूर्वक पूरे कर लिए हैं और लॉन्च विंडो की घोषणा जल्द की जाएगी। इस मिशन के साथ ही भारत उन चुनिंदा देशों की सूची में शामिल हो जाएगा, जिन्होंने इस तरह की जटिल अंतरिक्ष उपलब्धि हासिल की है। देश-विदेश के वैज्ञानिकों ने भारतीय टीम की इस उपलब्धि की सराहना की है। युवा वैज्ञानिकों की टीम इस मिशन को सफल बनाने में जुटी हुई है।",
+    img: IMG.rocket }
 ];
 
 const catClass = { "भारत":"cat-bharat","दुनिया":"cat-duniya","राजनीति":"cat-rajniti","राज्य":"cat-bharat","खेल":"cat-khel","मनोरंजन":"cat-manoranjan","बिजनेस":"cat-business","तकनीक":"cat-tech" };
@@ -870,15 +785,12 @@ function absoluteTime(offsetMinutes){
   return `${d.getDate()} ${HI_MONTHS[d.getMonth()]}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-function fmtShortDate(d){
-  return `${d.getDate()} ${HI_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
-}
 function updateClock(){
   const d = new Date();
-  const clockEl = document.getElementById('miniClock');
-  const dateEl = document.getElementById('miniDate');
-  if(clockEl) clockEl.textContent = fmtTime(d);
-  if(dateEl)  dateEl.textContent  = fmtShortDate(d);
+  const topClockEl = document.getElementById('topClock');
+  const topDateEl = document.getElementById('topDate');
+  if(topClockEl) topClockEl.textContent = fmtTime(d);
+  if(topDateEl)  topDateEl.textContent  = fmtFullDate(d);
 }
 
 /* ==========================================================================
@@ -1020,37 +932,6 @@ document.getElementById('searchBox').addEventListener('input', (e)=>{
   currentCat = "all";
   currentSearch = e.target.value;
   render("all", currentSearch);
-});
-
-/* ==========================================================================
-   FOOTER LINKS ACCORDION (BBC-style)
-   ========================================================================== */
-function toggleFL(id){
-  const item = document.getElementById(id);
-  if(!item) return;
-  const body = item.querySelector('.fl-body');
-  const wasOpen = item.classList.contains('open');
-  // close all
-  document.querySelectorAll('.fl-item.open').forEach(o=>{
-    o.classList.remove('open');
-    o.querySelector('.fl-body').style.maxHeight = null;
-  });
-  if(!wasOpen){
-    item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-  }
-}
-function scrollToFL(id){
-  const target = document.getElementById('fl-' + id);
-  if(!target) return;
-  target.scrollIntoView({ behavior:'smooth', block:'center' });
-  toggleFL('fl-' + id);
-}
-document.addEventListener('click', (e)=>{
-  const link = e.target.closest('.fl-scroll');
-  if(!link) return;
-  e.preventDefault();
-  scrollToFL(link.getAttribute('data-fl'));
 });
 
 /* ==========================================================================

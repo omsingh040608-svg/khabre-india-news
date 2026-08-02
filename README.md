@@ -20,6 +20,14 @@
 - `logo.png` — brand logo
 - `anupam-parihar.jpg` — संपादक अनुपम परिहार का फोटो (हमारी टीम)
 
+## Info Pages (footer links से खुलते हैं)
+- `about.html` — हमारे बारे में (+ हमारी टीम)
+- `contact.html` — संपर्क करें
+- `privacy.html` — गोपनीयता नीति
+- `terms.html` — उपयोग की शर्तें
+- `cookies.html` — कुकीज़
+- `donotshare.html` — Do Not Share or Sell My Info
+
 ## News कैसे update करें
 `index.html` में `newsData` array (लगभग line 550 के आस-पास) खोलें और अपनी खबर जोड़ें/बदलें:
 
