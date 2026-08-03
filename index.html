@@ -69,7 +69,7 @@
   .brand-block{display:flex;align-items:center;gap:16px;animation:brandIn .9s cubic-bezier(.2,.7,.2,1) both;}
   @keyframes brandIn{from{opacity:0;transform:translateX(-18px);}to{opacity:1;transform:none;}}
   .brand-logo{height:64px;width:auto;border-radius:12px;flex-shrink:0;box-shadow:0 4px 14px rgba(18,43,126,.16);}
-  .brand-text .brand{font-size:26px;color:var(--blue-deep);font-weight:800;line-height:1.15;}
+.brand-text .brand{font-size:26px;color:var(--blue-deep);font-weight:900;line-height:1.15;font-family:'Times New Roman',Times,serif;letter-spacing:.5px;}
 
   /* Social icons — compact, sit in the corner just above the blue nav line */
   .social-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
@@ -116,7 +116,7 @@
   .pulse-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:pulse 1.4s infinite;}
   @keyframes pulse{0%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(1.6);}100%{opacity:1;transform:scale(1);}}
   .ticker-track-outer{flex:1;overflow:hidden;height:100%;display:flex;align-items:center;}
-  .ticker-track{display:flex;gap:60px;white-space:nowrap;animation:scroll-left 40s linear infinite;font-size:14.5px;font-weight:500;padding-left:24px;}
+.ticker-track{display:flex;gap:60px;white-space:nowrap;animation:scroll-left 600s linear infinite;font-size:14.5px;font-weight:500;padding-left:24px;}
   .ticker-track span{opacity:.95;}
   .ticker:hover .ticker-track{animation-play-state:paused;}
   @keyframes scroll-left{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
@@ -273,8 +273,9 @@
   .cat-links a:hover{color:#fff;padding-left:4px;}
   .bottom-bar{border-top:1px solid rgba(255,255,255,.14);padding:16px 0;font-family:'Inter',sans-serif;font-size:12.5px;color:#9aa4c7;text-align:center;}
 
-  /* ===== Mobile: compact full-width news cards (small image, full headline) ===== */
+/* ===== Mobile: compact full-width news cards (small image, full headline) ===== */
   @media (max-width:640px){
+    .wrap{padding:0 18px;}
     .layout,main,aside,.side-box{min-width:0;max-width:100%;}
     .hero-grid{display:flex;flex-direction:column;gap:14px;}
     .card{display:flex;flex-direction:row;align-items:stretch;border-radius:8px;width:100%;min-width:0;}
@@ -895,7 +896,7 @@ function render(filterCat, searchTerm){
   const rowsWrap = document.getElementById('categoryRows');
   rowsWrap.innerHTML = "";
 
-
+ 
   if(term || (filterCat && filterCat!=="all")){
     const title = term ? `खोज परिणाम: "${searchTerm}"` : filterCat;
     const items = term ? data : ordered.filter(n=>n.category===filterCat);
