@@ -256,14 +256,10 @@
   .fl-links a{font-family:'Inter',sans-serif;font-size:13px;color:#c3cae3;padding:5px 14px;cursor:pointer;transition:color .2s ease,text-decoration .2s ease;}
   .fl-links a:hover{color:#fff;text-decoration:underline;}
 
-  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;padding:34px 0;}
-  @media (max-width:800px){.footer-grid{grid-template-columns:1fr;}}
-
-  /* Footer left info — screen edge se thoda space */
-  .footer-grid{padding-left:26px;}
-  @media (max-width:800px){.footer-grid{padding-left:20px;}}
-  @media (max-width:640px){.footer-grid{padding-left:16px;}}
-  @media (max-width:480px){.footer-grid{padding-left:14px;}}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;padding:34px 26px;}
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr;padding:34px 20px;}}
+  @media (max-width:640px){.footer-grid{padding:30px 16px;}}
+  @media (max-width:480px){.footer-grid{padding:26px 16px;}}
   .footer-grid h5{color:#fff;font-family:'Baloo 2',sans-serif;font-size:16px;margin-bottom:14px;}
   .footer-grid p, .footer-grid a{font-size:14px;color:#c3cae3;line-height:1.8;}
   .footer-brand-logo{height:56px;width:auto;border-radius:10px;background:#fff;padding:4px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.25);}
@@ -342,7 +338,7 @@
     .editor-card{gap:18px;}
     .editor-avatar{width:88px;height:88px;}
 .editor-card h4{font-size:19px;}
-    .footer-grid{gap:22px;padding:26px 0 26px 14px;}
+    .footer-grid{gap:22px;padding:26px 16px;}
     .bottom-bar{padding:13px 14px;line-height:1.6;}
   }
   @media (max-width:360px){
