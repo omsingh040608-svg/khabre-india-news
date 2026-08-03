@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="hi" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=yes, email=yes, address=no">
+<meta name="google" content="notranslate">
+<title>श्रेणी | Khabre India News</title>
+<meta name="description" content="ख़बरें इंडिया न्यूज़ — श्रेणी अनुसार सभी ख़बरें पढ़ें।">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1B3FAE; --blue-deep:#122B7E; --red:#E30613; --ink:#16181D;
+    --paper:#F6F5F1; --paper-dim:#EDEBE4; --muted:#6B7280; --gold:#C9971F;
+    --line:#DEDBD1; --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
+  html,body{-webkit-text-size-adjust:100%;text-size-adjust:100%;max-width:100%;}
+  body{
+    font-family:'Hind',sans-serif;background:var(--paper);color:var(--ink);
+    line-height:1.5;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:auto;
+    touch-action:pan-y;-webkit-overflow-scrolling:touch;-webkit-tap-highlight-color:transparent;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
+  h1,h2,h3,.brand{font-family:'Baloo 2',sans-serif;}
+
+  /* Mini top bar */
+  .cat-bar{
+    background:var(--blue-deep);color:#fff;position:sticky;top:0;z-index:40;
+    box-shadow:0 2px 12px rgba(18,43,126,.18);
+  }
+  .cat-bar-inner{display:flex;align-items:center;gap:12px;padding:10px 0;}
+  .back-btn{
+    display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);color:#fff;font-family:'Inter',sans-serif;
+    font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;
+    transition:background .2s ease,transform .2s ease;flex-shrink:0;
+  }
+  .back-btn:hover{background:var(--red);}
+  .back-btn:active{transform:scale(.96);}
+  .cat-bar .mini-brand{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;line-height:1.2;flex:1;min-width:0;word-break:break-word;overflow-wrap:anywhere;}
+  .cat-bar .mini-brand small{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.4px;}
+
+  /* Category hero */
+  .cat-hero{background:linear-gradient(135deg,var(--blue),var(--blue-deep));color:#fff;position:relative;overflow:hidden;}
+  .cat-hero .wrap{position:relative;z-index:2;padding-top:26px;padding-bottom:22px;}
+  .cat-hero h1{font-size:30px;font-weight:800;display:flex;align-items:center;gap:12px;line-height:1.25;word-break:break-word;overflow-wrap:anywhere;}
+  .cat-hero h1::before{content:"";width:8px;height:30px;background:var(--gold);border-radius:4px;flex-shrink:0;}
+  .cat-hero p{font-family:'Inter',sans-serif;font-size:13.5px;color:#cdd6f5;margin-top:8px;font-weight:600;}
+
+  /* Category chips */
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0;}
+  .chip{
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;
+    border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer;
+    transition:all .2s ease;flex-shrink:0;
+  }
+  .chip.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 12px rgba(27,63,174,.22);}
+  .chip:hover{background:var(--paper-dim);}
+  .chip.active:hover{background:var(--blue-deep);}
+
+  /* Category news list */
+  .cat-list{display:flex;flex-direction:column;gap:16px;padding-bottom:40px;}
+  .c-card{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:row;align-items:stretch;cursor:pointer;width:100%;min-width:0;
+    transition:box-shadow .25s ease,transform .25s ease;
+  }
+  .c-card:hover{box-shadow:0 12px 26px rgba(20,30,60,.13);transform:translateY(-3px);}
+  .c-thumb{width:190px;min-width:190px;height:128px;background:#0b1230;overflow:hidden;flex-shrink:0;}
+  .c-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .c-card:hover .c-thumb img{transform:scale(1.06);}
+  .c-body{padding:14px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0;}
+  .c-body h3{font-size:17.5px;line-height:1.4;color:var(--ink);word-break:break-word;overflow-wrap:anywhere;min-width:0;display:block;}
+  .c-body .c-meta{display:flex;gap:8px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:11.5px;color:var(--muted);margin-top:10px;font-weight:600;}
+  .c-body .c-sum{font-size:13.5px;color:#3c3f47;margin-top:6px;word-break:break-word;overflow-wrap:anywhere;min-width:0;display:none;}
+
+  .notfound{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:44px 26px;text-align:center;margin:20px 0;}
+  .notfound .nf-icon{font-size:50px;margin-bottom:10px;}
+  .notfound h2{font-size:23px;color:var(--blue-deep);margin-bottom:8px;}
+  .notfound p{color:var(--muted);font-size:15px;margin-bottom:20px;}
+  .nf-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 26px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s ease;}
+  .nf-btn:hover{background:var(--red);}
+
+  .bottom-bar{border-top:1px solid var(--line);padding:18px 14px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--muted);text-align:center;background:var(--white);}
+
+  @media (max-width:600px){
+    .wrap{padding:0 14px;}
+    .cat-hero h1{font-size:23px;}
+    .cat-hero h1::before{width:6px;height:24px;}
+    .c-card{flex-direction:row;}
+    .c-thumb{width:118px;min-width:118px;height:96px;}
+    .c-body{padding:10px 12px;justify-content:center;}
+    .c-body h3{font-size:14.5px;line-height:1.35;}
+    .c-body .c-meta{font-size:10px;margin-top:6px;}
+    .c-body .c-sum{display:none;}
+  }
+  @media (max-width:360px){
+    .c-thumb{width:104px;min-width:104px;height:88px;}
+    .c-body h3{font-size:13.5px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="cat-bar">
+  <div class="wrap cat-bar-inner">
+    <a class="back-btn" href="index.html" aria-label="वापस जाएँ">← <span>वापस</span></a>
+    <div class="mini-brand">Khabre India News<small>श्रेणी अनुसार ख़बरें</small></div>
+  </div>
+</div>
+
+<!-- Category hero -->
+<div class="cat-hero">
+  <div class="wrap">
+    <h1 id="catTitle">श्रेणी</h1>
+    <p id="catCount"></p>
+  </div>
+</div>
+
+<!-- Category chips -->
+<div class="wrap">
+  <div class="chips" id="catChips"></div>
+  <div class="cat-list" id="catList"></div>
+</div>
+
+<!-- Not found state -->
+<div class="wrap" id="notFoundWrap" style="display:none;">
+  <div class="notfound">
+    <div class="nf-icon">📰</div>
+    <h2>श्रेणी नहीं मिली</h2>
+    <p>आपके द्वारा चुनी गई श्रेणी मौजूद नहीं है।</p>
+    <a class="nf-btn" href="index.html">← होम जाएँ</a>
+  </div>
+</div>
+
+<div class="bottom-bar">© <span id="yearNow"></span> Khabre India News — सर्वाधिकार सुरक्षित।</div>
+
+<script src="news-data.js"></script>
+<script>
+/* ===== helpers ===== */
+function pad(n){ return n<10 ? '0'+n : ''+n; }
+const HI_MONTHS = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+const LOAD_TIME = Date.now();
+function relativeTime(offsetMinutes){
+  const t = LOAD_TIME - offsetMinutes * 60000;
+  const elapsed = Math.floor((Date.now() - t) / 1000);
+  if(elapsed < 60) return `${elapsed} सेकंड पहले`;
+  const mins = Math.floor(elapsed/60);
+  if(mins < 60)  return `${mins} मिनट पहले`;
+  const hrs = Math.floor(mins/60);
+  if(hrs < 24)   return `${hrs} घंटे पहले`;
+  return `${Math.floor(hrs/24)} दिन पहले`;
+}
+function absoluteTime(offsetMinutes){
+  const d = new Date(LOAD_TIME - offsetMinutes * 60000);
+  return `${d.getDate()} ${HI_MONTHS[d.getMonth()]}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function thumbOf(url){ return (url||'').replace('w=1200&q=70','w=400&q=60'); }
+document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+/* ===== read category from URL ===== */
+const params = new URLSearchParams(window.location.search);
+const rawCat = params.get('cat');
+const allCats = [...new Set(newsData.map(n => n.category))];
+let currentCat = rawCat;
+
+/* Invalid / missing category → fall back to the first real category */
+if(!currentCat || !allCats.includes(currentCat)){
+  currentCat = allCats[0] || null;
+}
+
+if(!currentCat){
+  document.querySelector('.cat-hero').style.display = 'none';
+  document.getElementById('notFoundWrap').style.display = 'block';
+} else {
+  const items = newsData.filter(n => n.category === currentCat);
+  document.getElementById('catTitle').textContent = currentCat;
+  document.getElementById('catCount').textContent = `${items.length} ख़बरें`;
+
+  /* ===== chips — हर श्रेणी के लिए (tap → नई category page खुलेगी) ===== */
+  const chipsWrap = document.getElementById('catChips');
+  chipsWrap.innerHTML = allCats.map(c =>
+    `<a class="chip ${c===currentCat?'active':''}" href="category.html?cat=${encodeURIComponent(c)}">${c}</a>`
+  ).join("");
+
+  /* ===== sabhi khbren ===== */
+  const list = document.getElementById('catList');
+  list.innerHTML = items.map(n => `
+    <a class="c-card" href="article.html?id=${n.id}">
+      <div class="c-thumb"><img src="${thumbOf(n.img)}" alt="${n.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1B3FAE,#3B5FE0)';"></div>
+      <div class="c-body">
+        <h3>${n.title}</h3>
+        <div class="c-meta"><span>📅 ${absoluteTime(n.offset)}</span><span>•</span><span>🕒 ${relativeTime(n.offset)}</span></div>
+      </div>
+    </a>`).join("");
+
+  document.title = currentCat + " | Khabre India News";
+
+  /* live timestamps update */
+  setInterval(() => {
+    document.querySelectorAll('.c-card').forEach((card, i) => {
+      const n = items[i];
+      if(n){
+        card.querySelector('.c-meta span:last-child').textContent = '🕒 ' + relativeTime(n.offset);
+      }
+    });
+  }, 15000);
+}
+</script>
+</body>
+</html>
+
