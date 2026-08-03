@@ -50,24 +50,16 @@
   .reveal.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
 
-  /* Top date & time strip — always visible at the very top on phone */
-  .top-strip{
-    background:var(--blue-deep);
-    color:#fff;
-    padding:9px 0;
-    font-family:'Inter',sans-serif;
-    font-size:13px;
-    font-weight:600;
-    text-align:center;
-    letter-spacing:.3px;
-    border-bottom:2px solid var(--red);
+  /* Small date & time under search */
+  .search-time{
+    display:inline-flex;align-items:center;gap:7px;margin:7px 0 0;
+    background:var(--blue);color:#000;font-family:'Inter',sans-serif;
+    font-size:11px;font-weight:700;line-height:1.2;padding:5px 9px;
+    border-radius:6px;max-width:100%;white-space:nowrap;
   }
-  .top-strip .wrap{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
-  .top-strip span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
-  .top-strip .ts-sep{opacity:.45;}
+  .search-time .ts-sep{opacity:.6;}
   @media (max-width:480px){
-    .top-strip{font-size:12px;padding:8px 0;}
-    .top-strip .wrap{gap:10px;}
+    .search-time{font-size:10.5px;padding:4px 8px;margin-top:6px;}
   }
 
   /* Masthead */
@@ -364,15 +356,6 @@
 </head>
 <body>
 
-<!-- Top date & time strip -->
-<div class="top-strip">
-  <div class="wrap">
-    <span>📅 <span id="topDate">--</span></span>
-    <span class="ts-sep">|</span>
-    <span>🕒 <span id="topClock">--:--:--</span></span>
-  </div>
-</div>
-
 <!-- Masthead -->
 <div class="masthead">
   <div class="wrap masthead-inner">
@@ -418,6 +401,11 @@
   <main>
     <div class="filter-bar">
       <input type="text" id="searchBox" placeholder="ख़बर खोजें...">
+    </div>
+    <div class="search-time">
+      <span id="topDate">--</span>
+      <span class="ts-sep">|</span>
+      <span id="topClock">--:--:--</span>
     </div>
 
     <div id="heroArea" class="hero-grid" style="margin-top:14px;"></div>
